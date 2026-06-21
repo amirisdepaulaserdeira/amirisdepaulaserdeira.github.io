@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===================== SEO / METADADOS ===================== -->
+  <!-- ⚠️ TROQUE "https://SEU-DOMINIO.com.br" pelo seu domínio (ou subdomínio do host) em TODOS os pontos abaixo. -->
+  <title>Amiris de Paula Serdeira — Da evidência à execução | Políticas de inclusão produtiva</title>
+  <meta name="description" content="Amiris Serdeira é economista, Subsecretária de Empreendedorismo e Produtividade do Estado de São Paulo e autora pela Springer. Pesquisa e pratica políticas de inclusão produtiva baseadas em evidência." />
+  <meta name="author" content="Amiris de Paula Serdeira" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#0E2A22" />
+  <link rel="canonical" href="https://SEU-DOMINIO.com.br/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Amiris de Paula Serdeira" />
+  <meta property="og:title" content="Amiris de Paula Serdeira — Da evidência à execução" />
+  <meta property="og:description" content="Economista e gestora pública. Subsecretária de Empreendedorismo e Produtividade de SP. Políticas de inclusão produtiva baseadas em evidência." />
+  <meta property="og:url" content="https://SEU-DOMINIO.com.br/" />
+  <meta property="og:image" content="https://SEU-DOMINIO.com.br/og-image.png" />
+  <meta property="profile:first_name" content="Amiris" />
+  <meta property="profile:last_name" content="Serdeira" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Amiris de Paula Serdeira — Da evidência à execução" />
+  <meta name="twitter:description" content="Economista e gestora pública. Subsecretária de Empreendedorismo e Produtividade de SP. Políticas de inclusão produtiva baseadas em evidência." />
+  <meta name="twitter:image" content="https://SEU-DOMINIO.com.br/og-image.png" />
+
+  <!-- Dados estruturados schema.org/Person (ajuda o Google a entender quem você é) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Amiris de Paula Serdeira",
+    "url": "https://SEU-DOMINIO.com.br/",
+    "jobTitle": "Subsecretária de Empreendedorismo e Produtividade",
+    "description": "Economista e gestora pública especializada em políticas de inclusão produtiva, empreendedorismo e desenvolvimento econômico no Brasil subnacional.",
+    "worksFor": {
+      "@type": "GovernmentOrganization",
+      "name": "Governo do Estado de São Paulo — Secretaria de Desenvolvimento Econômico"
+    },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Universidade Federal do Espírito Santo (UFES)" },
+      { "@type": "CollegeOrUniversity", "name": "Insper" },
+      { "@type": "CollegeOrUniversity", "name": "Fundação Getulio Vargas (FGV)" }
+    ],
+    "knowsAbout": [
+      "Políticas públicas", "Inclusão produtiva", "Microcrédito", "Avaliação de impacto",
+      "Desenvolvimento econômico", "Empreendedorismo", "Gestão pública"
+    ],
+    "author": [
+      { "@type": "Book", "name": "Behavioral Insights for Policy Design", "publisher": "Springer", "datePublished": "2023" },
+      { "@type": "Book", "name": "Insights comportamentais para o diagnóstico e desenho de políticas públicas", "publisher": "ENAP" }
+    ],
+    "sameAs": [
+      "https://www.linkedin.com/in/amiris-de-paula-serdeira/",
+      "https://amirisps.substack.com"
+    ]
+  }
+  </script>
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --green-900:#0E2A22;   /* fundo */
+      --green-850:#103127;
+      --green-800:#15392D;   /* superfícies */
+      --green-700:#1E4D3C;   /* bordas */
+      --gold:#C9A24B;        /* acento metálico */
+      --gold-soft:#E3C77E;
+      --cream:#F3EFE6;       /* texto principal sobre verde */
+      --sage:#A6BEB1;        /* texto secundário */
+      --sage-dim:#7E978A;
+      --maxw:1080px;
+      --measure:62ch;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--green-900);
+      color:var(--cream);
+      font-family:"IBM Plex Sans",system-ui,sans-serif;
+      font-size:clamp(16px,1vw + 14px,18px);
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    a{color:inherit}
+    img,svg{display:block;max-width:100%}
+
+    .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(20px,5vw,48px)}
+
+    /* eyebrow / rótulos em mono = a "voz dos dados" */
+    .eyebrow{
+      font-family:"IBM Plex Mono",monospace;
+      font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--gold);margin:0 0 .9rem;
+      display:flex;align-items:center;gap:.7rem;
+    }
+    .eyebrow::before{
+      content:"";width:8px;height:8px;flex:0 0 auto;
+      background:var(--gold);transform:rotate(45deg);
+    }
+
+    h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:500;line-height:1.06;margin:0}
+    h2{font-size:clamp(1.7rem,3.4vw,2.5rem);letter-spacing:-.01em}
+    h3{font-size:1.18rem;font-weight:600;letter-spacing:-.005em}
+    p{margin:0 0 1.1rem}
+    .lead{max-width:var(--measure)}
+
+    /* ============ NAV ============ */
+    header.site{
+      position:sticky;top:0;z-index:50;
+      background:rgba(14,42,34,.82);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--green-700);
+    }
+    header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:14px}
+    .brand{font-family:"Fraunces",serif;font-weight:600;font-size:1.02rem;letter-spacing:.01em;white-space:nowrap}
+    .brand b{color:var(--gold);font-weight:600}
+    nav.menu{display:flex;gap:1.4rem;flex-wrap:wrap}
+    nav.menu a{
+      font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.04em;
+      color:var(--sage);text-decoration:none;padding:4px 0;position:relative;
+    }
+    nav.menu a:hover,nav.menu a:focus-visible{color:var(--cream)}
+    nav.menu a::after{content:"";position:absolute;left:0;bottom:-2px;height:1px;width:0;background:var(--gold);transition:width .25s ease}
+    nav.menu a:hover::after,nav.menu a:focus-visible::after{width:100%}
+
+    /* ============ HERO ============ */
+    .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--green-700)}
+    .hero .wrap{display:grid;grid-template-columns:1.5fr .9fr;gap:clamp(24px,4vw,56px);align-items:center;padding-block:clamp(56px,9vw,108px)}
+    .hero h1{font-size:clamp(2.9rem,8vw,5.6rem);font-weight:400;letter-spacing:-.025em}
+    .hero h1 em{font-style:italic;color:var(--gold-soft)}
+    .credline{
+      font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em;
+      color:var(--sage);margin-top:1.6rem;line-height:2;
+    }
+    .credline span{white-space:nowrap}
+    .credline i{color:var(--green-700);font-style:normal;padding:0 .5rem}
+    .position{max-width:46ch;margin-top:1.5rem;color:var(--cream)}
+    .position strong{color:var(--gold-soft);font-weight:500}
+
+    /* assinatura: o "sistema de raízes" = a espinha dorsal da trajetória */
+    .roots{align-self:stretch;display:flex;align-items:center;justify-content:center}
+    .roots svg{width:100%;max-width:300px;height:auto;opacity:.95}
+    .root-path{fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linecap:round}
+    .root-node{fill:var(--green-900);stroke:var(--gold);stroke-width:1.4}
+
+    /* ============ FAIXA DE PROVA MATERIAL ============ */
+    .proof{background:var(--green-850);border-bottom:1px solid var(--green-700)}
+    .proof .wrap{padding-block:clamp(40px,6vw,64px)}
+    .proof .head{max-width:var(--measure);margin-bottom:2.4rem}
+    .proof .head p{color:var(--sage);margin:0}
+    .figs{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,52px)}
+    .fig{border-top:1px solid var(--green-700);padding-top:1.2rem}
+    .fig .num{font-family:"Fraunces",serif;font-weight:400;font-size:clamp(2.4rem,5vw,3.6rem);line-height:1;color:var(--gold-soft);letter-spacing:-.02em}
+    .fig .num small{font-size:.42em;color:var(--cream);letter-spacing:0}
+    .fig .desc{margin:.8rem 0 .6rem;max-width:34ch}
+    .fig .src{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.04em;color:var(--sage-dim)}
+
+    /* ============ SEÇÕES GENÉRICAS ============ */
+    section.block{padding-block:clamp(56px,8vw,96px);border-bottom:1px solid var(--green-700)}
+    .sec-head{margin-bottom:2.6rem}
+
+    /* Sobre */
+    .about-grid{display:grid;grid-template-columns:1.4fr .8fr;gap:clamp(28px,5vw,64px)}
+    .about-grid .bio{max-width:var(--measure)}
+    .about-grid .bio p:last-child{margin-bottom:0}
+    .attrs{border-left:1px solid var(--green-700);padding-left:1.6rem;align-self:start}
+    .attrs .eyebrow{margin-bottom:1.4rem}
+    .attrs ul{list-style:none;margin:0;padding:0;display:grid;gap:1.1rem}
+    .attrs li strong{display:block;font-family:"Fraunces",serif;font-weight:600;font-size:1.02rem;color:var(--cream)}
+    .attrs li span{font-size:.92rem;color:var(--sage)}
+
+    /* Trajetória — a espinha (taproot) */
+    .timeline{position:relative;max-width:780px;margin-left:6px}
+    .timeline::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:1px;background:linear-gradient(var(--gold),var(--green-700))}
+    .node{position:relative;padding:0 0 2.6rem 2.2rem}
+    .node:last-child{padding-bottom:0}
+    .node::before{content:"";position:absolute;left:-5px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--green-900);border:1.6px solid var(--gold)}
+    .node .when{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.05em;color:var(--gold);text-transform:uppercase}
+    .node h3{margin:.35rem 0 .1rem}
+    .node .org{color:var(--sage);font-size:.95rem;margin-bottom:.7rem}
+    .node ul{margin:0;padding-left:1.1rem;color:var(--cream)}
+    .node ul li{margin:.3rem 0}
+    .node ul li::marker{color:var(--green-700)}
+
+    /* Publicações + newsletter */
+    .pubs{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px)}
+    .card{background:var(--green-800);border:1px solid var(--green-700);border-radius:2px;padding:1.6rem 1.7rem;transition:border-color .25s ease,transform .25s ease}
+    .card:hover{border-color:var(--gold);transform:translateY(-2px)}
+    .card .kind{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+    .card h3{margin:.7rem 0 .5rem;font-weight:600}
+    .card p{font-size:.92rem;color:var(--sage);margin:0}
+    .news{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.2rem;background:var(--green-850);border:1px solid var(--green-700);border-left:3px solid var(--gold);border-radius:2px;padding:1.8rem 2rem}
+    .news .t{max-width:60ch}
+    .news h3{margin:0 0 .4rem}
+    .news p{margin:0;color:var(--sage);font-size:.95rem}
+
+    /* botões/links */
+    .btn{
+      display:inline-flex;align-items:center;gap:.55rem;
+      font-family:"IBM Plex Mono",monospace;font-size:.82rem;letter-spacing:.03em;
+      text-decoration:none;color:var(--green-900);background:var(--gold);
+      padding:.7rem 1.2rem;border-radius:2px;border:1px solid var(--gold);
+      transition:background .2s ease,color .2s ease;white-space:nowrap;
+    }
+    .btn:hover,.btn:focus-visible{background:var(--gold-soft)}
+    .btn.ghost{background:transparent;color:var(--gold);}
+    .btn.ghost:hover,.btn.ghost:focus-visible{background:rgba(201,162,75,.12)}
+    .btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+    /* Contato */
+    .contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+    .contact h2 em{font-style:italic;color:var(--gold-soft)}
+    .links{display:flex;flex-direction:column;gap:.9rem;align-items:flex-start}
+    .links a{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;font-family:"IBM Plex Mono",monospace;font-size:.9rem;color:var(--cream);padding:.4rem 0;border-bottom:1px solid transparent}
+    .links a:hover,.links a:focus-visible{color:var(--gold-soft);border-color:var(--green-700)}
+    .links a .tag{color:var(--sage-dim);min-width:96px}
+
+    /* Rodapé */
+    footer.site{padding-block:clamp(36px,5vw,56px)}
+    footer.site .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:baseline;justify-content:space-between}
+    footer.site .sig{font-family:"Fraunces",serif;font-size:1.05rem;color:var(--gold-soft)}
+    footer.site small{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--sage-dim);letter-spacing:.03em}
+
+    /* foco visível p/ teclado */
+    a:focus-visible,.btn:focus-visible{outline:2px solid var(--gold-soft);outline-offset:3px;border-radius:2px}
+
+    /* reveal on scroll */
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.in{opacity:1;transform:none}
+
+    @media (max-width:860px){
+      .hero .wrap{grid-template-columns:1fr}
+      .roots{display:none}
+      .about-grid{grid-template-columns:1fr}
+      .attrs{border-left:0;border-top:1px solid var(--green-700);padding-left:0;padding-top:1.8rem}
+      .figs{grid-template-columns:1fr;gap:2rem}
+      .pubs{grid-template-columns:1fr}
+      .contact .wrap{grid-template-columns:1fr}
+    }
+    @media (max-width:560px){
+      nav.menu{display:none}
+    }
+    @media (prefers-reduced-motion:reduce){
+      *{scroll-behavior:auto !important}
+      .reveal{opacity:1;transform:none;transition:none}
+      .root-path{stroke-dasharray:none !important;stroke-dashoffset:0 !important}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site">
+    <div class="wrap">
+      <div class="brand">Amiris&nbsp;<b>Serdeira</b></div>
+      <nav class="menu" aria-label="Navegação principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#trajetoria">Trajetória</a>
+        <a href="#prova">Prova material</a>
+        <a href="#publicacoes">Publicações</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <p class="eyebrow">Economista · Gestora pública</p>
+          <h1>Da evidência<br />à <em>execução</em>.</h1>
+          <p class="position"><strong>Arquiteta-executora:</strong> quem desenha a política, faz funcionar na ponta e tem o dado para mostrar. Da pesquisa de padrão-ouro à implementação de política em escala estadual — sempre com a evidência no centro.</p>
+          <p class="credline">
+            <span>UFES</span><i>·</i><span>Insper (PAGP)</span><i>·</i><span>FGV (MPGPP)</span><br />
+            <span>Autora Springer &amp; ENAP</span><i>·</i><span>Inclusão produtiva baseada em evidência</span>
+          </p>
+        </div>
+
+        <!-- assinatura visual: raiz/espinha dorsal -->
+        <div class="roots" aria-hidden="true">
+          <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+            <path class="root-path" d="M100 8 L100 150" />
+            <path class="root-path" d="M100 150 C100 150 78 168 70 196 C64 218 60 240 56 268" />
+            <path class="root-path" d="M100 150 C100 150 122 168 130 196 C136 218 140 240 144 268" />
+            <path class="root-path" d="M100 196 C100 196 88 212 84 236 C82 250 80 262 79 274" />
+            <path class="root-path" d="M100 196 C100 196 112 212 116 236 C118 250 120 262 121 274" />
+            <path class="root-path" d="M70 196 C70 196 52 206 44 224" />
+            <path class="root-path" d="M130 196 C130 196 148 206 156 224" />
+            <circle class="root-node" cx="100" cy="62" r="5" />
+            <circle class="root-node" cx="100" cy="150" r="6" />
+            <circle class="root-node" cx="70" cy="196" r="4.5" />
+            <circle class="root-node" cx="130" cy="196" r="4.5" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROVA MATERIAL ============ -->
+    <section class="proof" id="prova">
+      <div class="wrap">
+        <div class="head reveal">
+          <p class="eyebrow">Prova material</p>
+          <h2 style="margin-bottom:.9rem">A execução sistemática destrava resultado.</h2>
+          <p>Dois recortes públicos de políticas que coordeno hoje na Secretaria de Desenvolvimento Econômico de São Paulo — não como inventário, mas como evidência do mecanismo: design, gestão e medição operando juntos.</p>
+        </div>
+        <div class="figs">
+          <div class="fig reveal">
+            <div class="num">R$&nbsp;669,1<small>&nbsp;mi</small></div>
+            <p class="desc">concedidos em <strong>42.097 operações</strong> de microcrédito pelo Banco do Povo Paulista.</p>
+            <p class="src">Período jan/2023–mar/2026 · Fonte: Agência SP (abr/2026)</p>
+          </div>
+          <div class="fig reveal">
+            <div class="num">464<small>&nbsp;municípios</small></div>
+            <p class="desc">reconhecidos com o selo de desburocratização <strong>Facilita SP</strong> (bronze, prata, ouro e inovação).</p>
+            <p class="src">Fonte: Facilita SP / Governo do Estado de São Paulo</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SOBRE ============ -->
+    <section class="block" id="sobre">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Sobre</p>
+          <h2>Uma década na mesma pergunta:<br />o que faz a política pública entregar.</h2>
+        </div>
+        <div class="about-grid">
+          <div class="bio reveal">
+            <p>Sou economista e gestora pública, especializada em políticas de inclusão produtiva, empreendedorismo e desenvolvimento econômico. Atualmente, como Subsecretária de Empreendedorismo e Produtividade do Estado de São Paulo, lidero a agenda de empreendedorismo, microcrédito e desburocratização do estado — uma das maiores operações de política de desenvolvimento econômico estadual do Brasil.</p>
+            <p>Tenho especialização em Gestão Pública (Insper) e sou mestranda em Gestão e Políticas Públicas (FGV), com formação em avaliação de impacto na tradição do J-PAL desde 2017. Sou coautora de dois livros: <em>Insights comportamentais para o diagnóstico e desenho de políticas públicas</em> (ENAP) e <em>Behavioral Insights for Policy Design</em> (Springer, 2023).</p>
+            <p>Possuo mais de uma década de experiência na formulação, implementação e monitoramento/avaliação de políticas públicas voltadas para a erradicação de desigualdades sociais. Minha trajetória atravessa a pesquisa aplicada de padrão-ouro (avaliação de impacto na equipe de Ricardo Paes de Barros, no Insper), a gestão de operações sociais em escala nacional (Instituto Ayrton Senna e Instituto Natura) e, hoje, a formulação e a implementação direta de política no Governo do Estado de São Paulo.</p>
+          </div>
+          <div class="attrs reveal">
+            <p class="eyebrow">O método</p>
+            <ul>
+              <li><strong>Rigor com evidência</strong><span>Fala com dado, não com achismo.</span></li>
+              <li><strong>Vista de dentro</strong><span>A voz de quem implementa, não de quem só observa de fora.</span></li>
+              <li><strong>Foco subnacional</strong><span>Estados e municípios como território de especialidade.</span></li>
+              <li><strong>Sobriedade sênior</strong><span>Autoridade tranquila, ancorada em resultado.</span></li>
+              <li><strong>Tradução</strong><span>Torna o complexo acessível ao gestor e ao cidadão real.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TRAJETÓRIA ============ -->
+    <section class="block" id="trajetoria">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Trajetória</p>
+          <h2>Da pesquisa de padrão-ouro à<br />implementação em escala estadual.</h2>
+        </div>
+        <div class="timeline">
+          <div class="node reveal">
+            <div class="when">jan/2026 — presente</div>
+            <h3>Subsecretária de Empreendedorismo e Produtividade</h3>
+            <div class="org">Governo do Estado de São Paulo · SDE-SP</div>
+            <ul>
+              <li>Liberdade econômica e ambiente de negócios — <strong>Facilita SP</strong>, simplificando a abertura e a regularização de empresas.</li>
+              <li>Microcrédito produtivo e orientado — política estadual de crédito via <strong>Banco do Povo Paulista</strong>.</li>
+              <li>Fomento ao empreendedorismo e ao artesanato — <strong>Programa Empreendedor Artesão</strong>.</li>
+            </ul>
+          </div>
+          <div class="node reveal">
+            <div class="when">abr/2025 — jan/2026</div>
+            <h3>Diretora de Políticas de Inclusão Produtiva e Empregabilidade</h3>
+            <div class="org">Governo do Estado de São Paulo</div>
+            <ul>
+              <li>Conduzi o lançamento da política estadual de inclusão produtiva e empregabilidade (Decreto nº 69.680/2025).</li>
+              <li>Implementei o Trampolim, articulando 6 secretarias estaduais e 520 municípios aderentes.</li>
+            </ul>
+          </div>
+          <div class="node reveal">
+            <div class="when">set/2022 — abr/2025</div>
+            <h3>Coordenadora de Políticas Públicas</h3>
+            <div class="org">Instituto Natura</div>
+            <ul>
+              <li>Liderei a operação Brasil da Aliança pela Alfabetização — gestão estratégica em 18 estados.</li>
+              <li>Conduzi a automação da avaliação de fluência leitora com IA, reduzindo em 50% o orçamento das avaliações.</li>
+            </ul>
+          </div>
+          <div class="node reveal">
+            <div class="when">nov/2021 — ago/2022</div>
+            <h3>Coordenadora de Avaliação e Monitoramento</h3>
+            <div class="org">Instituto Ânima</div>
+            <ul>
+              <li>Implementei o Comitê Científico, instância da diretriz técnico-científica da agenda de pesquisa.</li>
+              <li>Coordenei o desenho de 2 teorias de mudança e 2 avaliações de impacto.</li>
+            </ul>
+          </div>
+          <div class="node reveal">
+            <div class="when">dez/2020 — nov/2021</div>
+            <h3>Analista Sênior de Planejamento, Gestão Estratégica e Inovação</h3>
+            <div class="org">Instituto Ayrton Senna</div>
+            <ul>
+              <li>Implementei a área de inovação educacional.</li>
+              <li>Geri a cátedra do Instituto Ayrton Senna no Insper e estruturei sua implementação na USP.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PUBLICAÇÕES + NEWSLETTER ============ -->
+    <section class="block" id="publicacoes">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Publicações</p>
+          <h2>Onde o método vira texto.</h2>
+        </div>
+        <div class="pubs">
+          <article class="card reveal">
+            <div class="kind">Livro · Springer · 2023</div>
+            <h3>Behavioral Insights for Policy Design</h3>
+            <p>Coautoria. Como insights comportamentais informam o diagnóstico e o desenho de políticas públicas.</p>
+          </article>
+          <article class="card reveal">
+            <div class="kind">Livro · ENAP</div>
+            <h3>Insights comportamentais para o diagnóstico e desenho de políticas públicas</h3>
+            <p>Coautoria. Edição brasileira, voltada ao gestor público.</p>
+          </article>
+          <article class="news reveal">
+            <div class="t">
+              <div class="kind" style="color:var(--gold)">Newsletter quinzenal</div>
+              <h3>Raízes de Mudança</h3>
+              <p>Análise baseada em evidências sobre políticas públicas, gestão e o que faz a política de inclusão funcionar no Brasil subnacional.</p>
+            </div>
+            <a class="btn" href="https://amirisps.substack.com/p/raizes-de-mudanca" target="_blank" rel="noopener">
+              Ler a newsletter
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTATO ============ -->
+    <section class="block contact" id="contato" style="border-bottom:0">
+      <div class="wrap">
+        <div class="reveal">
+          <p class="eyebrow">Contato</p>
+          <h2>Para conversas sobre política de<br /><em>inclusão produtiva</em>, dados e implementação.</h2>
+        </div>
+        <div class="links reveal">
+          <a href="https://www.linkedin.com/in/amiris-de-paula-serdeira/" target="_blank" rel="noopener"><span class="tag">LinkedIn</span> /in/amiris-de-paula-serdeira</a>
+          <a href="https://amirisps.substack.com" target="_blank" rel="noopener"><span class="tag">Substack</span> amirisps.substack.com</a>
+          <!-- ⚠️ Troque pelo seu e-mail profissional, ou remova esta linha. -->
+          <a href="mailto:contato@SEU-DOMINIO.com.br"><span class="tag">E-mail</span> contato@SEU-DOMINIO.com.br</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <span class="sig">Da evidência à execução.</span>
+      <small>Amiris de Paula Serdeira · Economista e gestora pública · São Paulo, Brasil</small>
+    </div>
+  </footer>
+
+  <script>
+    // assinatura: "desenhar" as raízes na entrada (respeita reduced-motion via CSS)
+    (function(){
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(!reduce){
+        document.querySelectorAll('.root-path').forEach(function(p,i){
+          var len = p.getTotalLength();
+          p.style.strokeDasharray = len;
+          p.style.strokeDashoffset = len;
+          p.style.transition = 'stroke-dashoffset 1.4s ease ' + (i*0.12) + 's';
+          requestAnimationFrame(function(){ requestAnimationFrame(function(){ p.style.strokeDashoffset = 0; }); });
+        });
+      }
+      // reveal on scroll
+      var els = document.querySelectorAll('.reveal');
+      if('IntersectionObserver' in window && !reduce){
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, {rootMargin:'0px 0px -8% 0px', threshold:.08});
+        els.forEach(function(el){ io.observe(el); });
+      } else {
+        els.forEach(function(el){ el.classList.add('in'); });
+      }
+    })();
+  </script>
+</body>
+</html>
