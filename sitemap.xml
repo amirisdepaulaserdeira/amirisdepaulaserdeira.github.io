@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://amirisdepaulaserdeira.github.io/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://amirisdepaulaserdeira.github.io/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://amirisdepaulaserdeira.github.io/en/" />
+  </url>
+  <url>
+    <loc>https://amirisdepaulaserdeira.github.io/en/</loc>
+    <lastmod>2026-10-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://amirisdepaulaserdeira.github.io/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://amirisdepaulaserdeira.github.io/en/" />
   </url>
   <url>
     <loc>https://amirisdepaulaserdeira.github.io/temas/nao-adesao/</loc>
     <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://amirisdepaulaserdeira.github.io/cv-amiris-serdeira.pdf</loc>
+    <lastmod>2026-10-11</lastmod>
   </url>
 </urlset>
