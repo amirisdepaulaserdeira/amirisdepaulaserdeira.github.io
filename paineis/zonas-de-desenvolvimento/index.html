@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Zonas de desenvolvimento: zoneamento municipal lido em CNAE | Amiris de Paula Serdeira</title>
+  <meta name="description" content="Ferramenta para ler o zoneamento municipal como estratégia econômica: quais atividades, em CNAE, cabem em cada zona, e que ajustes permitiriam receber os setores que municípios parecidos já desenvolveram. Primeira aplicação: Cruzeiro (SP)." />
+  <meta name="author" content="Amiris de Paula Serdeira" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#071736" />
+  <link rel="canonical" href="https://amirisdepaulaserdeira.github.io/paineis/zonas-de-desenvolvimento/" />
+  <link rel="icon" type="image/png" href="https://amirisdepaulaserdeira.github.io/favicon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:title" content="Zonas de desenvolvimento" />
+  <meta property="og:description" content="O zoneamento municipal lido como estratégia econômica: onde cada setor cabe no município e o que mudar para receber os que faltam." />
+  <meta property="og:url" content="https://amirisdepaulaserdeira.github.io/paineis/zonas-de-desenvolvimento/" />
+  <meta property="og:image" content="https://amirisdepaulaserdeira.github.io/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Zonas de desenvolvimento", "url": "https://amirisdepaulaserdeira.github.io/paineis/zonas-de-desenvolvimento/", "applicationCategory": "Planejamento urbano e desenvolvimento econômico", "inLanguage": "pt-BR", "description": "Ferramenta para ler o zoneamento municipal como estratégia econômica: quais atividades, em CNAE, cabem em cada zona, e que ajustes permitiriam receber os setores que municípios parecidos já desenvolveram. Primeira aplicação: Cruzeiro (SP).", "creator": {"@type": "Person", "name": "Amiris de Paula Serdeira", "url": "https://amirisdepaulaserdeira.github.io/"}}</script>
+  <style>
+:root{--navy-900:#071736;--navy-850:#0A1C3D;--navy-800:#0E2347;--navy-700:#21386A;--gold:#D0A03B;--gold-soft:#E6C173;--green:#185842;
+--cream:#F3E9D2;--slate:#93A4C4;--slate-dim:#6E7F9E;--maxw:1180px;box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--navy-900)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy-900);color:var(--cream);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:clamp(15px,.6vw + 13px,17px);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(18px,4.5vw,48px)}
+h1,h2,h3{font-family:"Fraunces",Georgia,"Times New Roman",serif;font-weight:500;line-height:1.1;margin:0}
+p{margin:0 0 1rem}
+header.site{position:sticky;top:0;z-index:50;background:rgba(7,23,54,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--navy-700)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:12px}
+.brand{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.02rem;white-space:nowrap;text-decoration:none}
+.brand b{color:var(--gold);font-weight:600}
+nav.menu{display:flex;gap:1.15rem;flex-wrap:wrap}
+nav.menu a{font-family:"IBM Plex Mono",monospace;font-size:.76rem;letter-spacing:.03em;color:var(--slate);text-decoration:none;padding:4px 0}
+nav.menu a:hover,nav.menu a:focus-visible{color:var(--cream)}
+@media (max-width:720px){nav.menu{display:none}}
+.opening{border-bottom:1px solid var(--navy-700)}
+.opening .wrap{padding-block:clamp(36px,6vw,72px) clamp(32px,5vw,52px)}
+.crumbs{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--slate-dim);margin:0 0 1.6rem}
+.crumbs a{color:var(--slate);text-decoration:none;border-bottom:1px solid var(--navy-700)}
+.crumbs span{padding:0 .45rem;color:var(--navy-700)}
+.opening h1{font-size:clamp(2.1rem,5.4vw,3.8rem);font-weight:400;letter-spacing:-.02em;max-width:18ch}
+.definition{margin-top:1.6rem;max-width:62ch;font-family:"Fraunces",Georgia,serif;font-size:clamp(1.08rem,1.5vw,1.28rem);line-height:1.5;padding-left:1.2rem;border-left:2px solid var(--gold)}
+.meta{margin-top:1.6rem;font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--slate);line-height:1.9}
+.meta strong{color:var(--cream);font-weight:500}
+.panel .wrap{padding-block:clamp(36px,5vw,64px)}
+.sources{border-top:1px solid var(--navy-700)}
+.sources .wrap{padding-block:clamp(36px,5vw,64px);max-width:var(--maxw)}
+.sources h2{font-size:clamp(1.35rem,2.4vw,1.75rem);margin-bottom:1rem}
+.sources ul{padding-left:1.1rem;max-width:80ch}
+.sources li{margin-bottom:.5rem;color:var(--slate)}
+.sources li b{color:var(--cream);font-weight:500}
+.sources a{color:var(--gold-soft);text-decoration:none;border-bottom:1px solid var(--navy-700)}
+.sources .cite{overflow-wrap:anywhere;font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--slate);background:var(--navy-850);border:1px solid var(--navy-700);padding:.9rem 1rem;max-width:80ch}
+.dl{display:inline-block;margin:.4rem 0 1.4rem;font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--navy-900);background:var(--gold-soft);padding:.55rem .9rem;border-radius:3px;text-decoration:none}
+.sources a.dl{color:var(--navy-900);border:0}
+.sources a.dl:hover{background:var(--gold)}
+footer.site{padding-block:clamp(32px,5vw,52px);border-top:1px solid var(--navy-700)}
+footer.site .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:baseline;justify-content:space-between}
+footer.site .sig{font-family:"Fraunces",Georgia,serif;font-size:1.05rem;color:var(--gold-soft)}
+footer.site small{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--slate-dim)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold-soft);outline-offset:3px}
+
+.zd{--ok:#5DBB8A;--ac:#E6C173;--dt:#D9A15B;--pr:#E8806B;--na:#4A5B80;line-height:1.6}
+.zd h2{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:clamp(1.35rem,2.4vw,1.75rem);margin:0 0 .5rem}
+.zd h3{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:1.15rem;margin:1.4rem 0 .4rem}
+.zd .sec{margin-top:clamp(36px,5vw,56px)}
+.zd .note{color:var(--slate);font-size:.88rem;max-width:78ch}
+.zd .lede{max-width:72ch}
+.zd b.v{color:var(--cream)}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.6rem}
+.tabs button{font:inherit;font-size:.92rem;color:var(--slate);background:var(--navy-850);border:1px solid var(--navy-700);border-radius:3px;padding:.5rem .9rem;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--navy-900);background:var(--gold-soft);border-color:var(--gold-soft)}
+.tabs button .st{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;opacity:.85}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1rem 0}
+.card{background:var(--navy-850);border:1px solid var(--navy-700);border-radius:3px;padding:1rem 1.1rem}
+.card .lab{color:var(--slate);font-size:.82rem}
+.card .big{font-family:"Fraunces",Georgia,serif;font-size:1.45rem;line-height:1.2;margin:.3rem 0}
+.card .sub{color:var(--slate);font-size:.82rem}
+.tw{overflow-x:auto;border:1px solid var(--navy-700);border-radius:3px}
+table.t{border-collapse:collapse;width:100%;font-size:.84rem}
+table.t th,table.t td{padding:.35rem .5rem;border-bottom:1px solid var(--navy-700);text-align:left;vertical-align:middle}
+table.t th{color:var(--slate);font-weight:500;background:var(--navy-850);position:sticky;top:0}
+table.t td.n,table.t th.n{text-align:right;font-variant-numeric:tabular-nums}
+table.m th.z,table.m td.c{text-align:center;padding:.3rem .25rem;min-width:2.6rem}
+table.m th.z{writing-mode:vertical-rl;transform:rotate(180deg);height:5.2rem;font-family:"IBM Plex Mono",monospace;font-size:.72rem}
+table.m th.row{position:sticky;left:0;background:var(--navy-900);z-index:1;min-width:220px;max-width:280px;color:var(--cream);font-weight:400}
+table.m td.c button{font:inherit;font-family:"IBM Plex Mono",monospace;font-size:.72rem;width:2.4rem;padding:.15rem 0;border-radius:2px;border:1px solid transparent;cursor:pointer;color:#071736}
+.s-PE{background:var(--ok)}.s-AC{background:var(--ac)}.s-DT{background:var(--dt)}.s-PR{background:var(--pr)}
+.s-Q{background:var(--na);color:var(--cream)!important}
+td.c button.prop{outline:2px solid var(--cream);outline-offset:1px}
+.flag{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--gold-soft);margin-left:.35rem}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.8rem;color:var(--slate);margin:.6rem 0}
+.legend i{display:inline-block;width:.9rem;height:.9rem;border-radius:2px;vertical-align:-2px;margin-right:.35rem}
+.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.5rem;margin:.8rem 0}
+.strip div{border-radius:3px;padding:.45rem .6rem;font-size:.8rem;color:#071736;min-height:3.2rem}
+.strip div b{display:block;font-family:"IBM Plex Mono",monospace;font-size:.78rem}
+.strip div.s-Q{color:var(--cream)}
+.ctl{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.6rem 0}
+.ctl select,.ctl button,.ctl label.btn{font:inherit;font-size:.88rem;color:var(--cream);background:var(--navy-850);border:1px solid var(--navy-700);border-radius:3px;padding:.45rem .7rem;cursor:pointer}
+.ctl select{max-width:100%;min-width:0;flex:1 1 220px}
+.ctl button.pri{color:var(--navy-900);background:var(--gold-soft);border-color:var(--gold-soft)}
+.bars{display:grid;grid-template-columns:minmax(160px,1.4fr) 2fr;gap:.25rem .8rem;align-items:center;font-size:.82rem}
+.bars .bl{color:var(--cream)}
+.bars .bb{position:relative;height:1.35rem}
+.bars .bb span{position:absolute;left:0;height:.5rem;border-radius:2px}
+.bars .bb span.a{top:.1rem;background:#6FA8DC}.bars .bb span.r{top:.7rem;background:#C792EA}
+.bars .bb em{position:absolute;right:0;top:0;font-style:normal;font-size:.72rem;color:var(--slate);font-family:"IBM Plex Mono",monospace}
+ol.steps{padding-left:1.2rem;max-width:80ch}
+ol.steps li{margin-bottom:.6rem}
+ol.steps li b{color:var(--cream)}
+.prop-list textarea{width:100%;min-height:2.2rem;font:inherit;font-size:.82rem;color:var(--cream);background:var(--navy-850);border:1px solid var(--navy-700);border-radius:3px;padding:.3rem .45rem}
+.empty{color:var(--slate);font-style:italic}
+@media (max-width:560px){.bars{grid-template-columns:1fr}.bars .bl{margin-top:.5rem}}
+.warn{border-left:3px solid var(--gold);background:var(--navy-850);padding:.8rem 1rem;max-width:80ch;font-size:.9rem}
+</style>
+</head>
+<body>
+  <header class="site"><div class="wrap">
+    <a class="brand" href="https://amirisdepaulaserdeira.github.io/">Amiris de Paula&nbsp;<b>Serdeira</b></a>
+    <nav class="menu" aria-label="Navegação principal"><a href="https://amirisdepaulaserdeira.github.io/#sobre">Sobre</a><a href="https://amirisdepaulaserdeira.github.io/#resultados">Resultados</a><a href="https://amirisdepaulaserdeira.github.io/#trajetoria">Trajetória</a><a href="https://amirisdepaulaserdeira.github.io/#temas">Temas</a><a href="https://amirisdepaulaserdeira.github.io/#publicacoes">Publicações</a><a href="https://amirisdepaulaserdeira.github.io/#newsletter">Newsletter</a><a href="https://amirisdepaulaserdeira.github.io/#contato">Contato</a></nav>
+  </div></header>
+  <main>
+    <section class="opening"><div class="wrap">
+      <p class="crumbs"><a href="https://amirisdepaulaserdeira.github.io/">Início</a><span>/</span><a href="../gemeos-de-desenvolvimento/">Painéis</a><span>/</span>Zonas de desenvolvimento</p>
+      <h1>Zonas de desenvolvimento</h1>
+      <p class="definition">O plano diretor e a lei de zoneamento dizem o que pode funcionar em cada parte da cidade, mas em categorias urbanísticas, não em atividades econômicas. Esta ferramenta traduz a lei para a CNAE e cruza o resultado com o caminho que municípios parecidos já percorreram: quais setores cabem em cada zona, e que ajustes abririam espaço para os que faltam.</p>
+      <p class="meta">Para uso conjunto da equipe estadual e do técnico municipal<br />Direção econômica: painel <a href="../gemeos-de-desenvolvimento/" style="color:var(--gold-soft)">Gêmeos de desenvolvimento</a> · versão de novembro de 2026<br />Elaboração: <strong>Amiris de Paula Serdeira</strong></p>
+    </div></section>
+
+    <section class="panel"><div class="wrap zd">
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-view="v-cru">Cruzeiro<span class="st">lei em texto · matriz pronta para validar</span></button>
+        <button role="tab" aria-selected="false" data-view="v-con">Conchal<span class="st">lei digitalizada · precisa de OCR</span></button>
+        <button role="tab" aria-selected="false" data-view="v-mon">Monte Aprazível<span class="st">sem lei localizada</span></button>
+      </div>
+
+      <div class="view" id="v-cru">
+        <section id="direcao">
+          <h2>1. Para onde o município pode ir</h2>
+          <p class="lede">Cruzeiro está <b class="v">abaixo do seu gêmeo</b>: municípios que partiram de um ponto parecido em 2000 chegaram mais longe no IFDM e no IPS. A indústria pesa muito no emprego formal (só a divisão 29 da CNAE, de veículos, reboques e carrocerias, responde por 20,6% dele), e o que as referências de caminho têm a mais é <b class="v">serviços de conhecimento e às empresas</b>.</p>
+          <div class="cards">
+            <div class="card"><div class="lab">Saldo em relação ao gêmeo</div><div class="big">−1,58 dp</div><div class="sub">IFDM 2023 e IPS 2026 · ajuste do gêmeo: bom</div></div>
+            <div class="card"><div class="lab">Especialização em 2024</div><div class="big" style="font-size:1.1rem">Indústria de média e alta tecnologia</div><div class="sub">+22,7 pontos percentuais acima da média paulista</div></div>
+            <div class="card"><div class="lab">Segmento-alavanca</div><div class="big" style="font-size:1.1rem">Serviços de conhecimento e às empresas</div><div class="sub">+8,2 pontos percentuais do emprego nas referências</div></div>
+          </div>
+          <p class="note">Referências de caminho: Votuporanga, Botucatu, Mogi das Cruzes, Andradina e Barretos. Emprego formal total em 2024: 23.886 pessoas (IBGE, CEMPRE).</p>
+          <h3>Onde as referências têm mais emprego que Cruzeiro</h3>
+          <div class="ctl"><label for="div-seg">Segmento</label><select id="div-seg"></select></div>
+          <div class="legend"><span><i style="background:#6FA8DC"></i>Cruzeiro</span><span><i style="background:#C792EA"></i>Média das referências</span><span>% do emprego formal de 2024, por divisão da CNAE, ordenado pela diferença</span></div>
+          <div class="bars" id="div-bars"></div>
+          <div class="ctl"><button id="div-all" data-on="0"></button></div>
+          <p class="note">"Sigilo" indica célula suprimida pelo IBGE para não identificar empresas.</p>
+        </section>
+
+        <section id="onde-cabe" class="sec">
+          <h2>2. Onde cada segmento cabe hoje</h2>
+          <p class="lede">Escolha um segmento. A faixa mostra, zona por zona, a regra mais favorável entre as categorias de uso da lei que correspondem àquele segmento. O quadro abaixo detalha cada categoria. Clique numa célula para propor outra regra: a proposta aparece com contorno claro e vai para a lista de ajustes.</p>
+          <div class="ctl"><label for="seg">Segmento</label><select id="seg"></select></div>
+          <div class="legend">
+            <span><i class="s-PE"></i>Permitido (PE)</span><span><i class="s-AC"></i>Análise da Comissão (AC)</span>
+            <span><i class="s-DT"></i>Deliberação técnica (DT)</span><span><i class="s-PR"></i>Proibido (PR)</span><span><i class="s-Q"></i>Conferir na lei</span>
+          </div>
+          <p class="note" id="seg-msg"></p>
+          <div class="strip" id="strip"></div>
+          <div id="seg-matrix"></div>
+        </section>
+
+        <section id="ajustes" class="sec">
+          <h2>3. Ajustes propostos ao zoneamento <span class="note" id="nprops"></span></h2>
+          <p class="note">Os ajustes ficam guardados neste navegador. Para levar a proposta para a reunião com a prefeitura, exporte a matriz completa ou salve o arquivo de ajustes.</p>
+          <div id="props"></div>
+          <div class="ctl">
+            <button class="pri" id="b-csv">Exportar matriz completa (CSV)</button>
+            <button id="b-json">Salvar ajustes</button>
+            <label class="btn" for="f-json">Abrir ajustes salvos</label><input type="file" id="f-json" accept="application/json,.json" hidden />
+            <button id="b-clear">Limpar ajustes</button>
+            <span class="note" id="io-msg"></span>
+          </div>
+        </section>
+
+        <section id="roteiro" class="sec">
+          <h2>4. Roteiro de trabalho com a prefeitura</h2>
+          <ol class="steps">
+            <li><b>Conferir a transcrição da lei.</b> O quadro veio do texto reconhecido por OCR do PDF publicado pela Câmara. 9 das 64 linhas desalinharam e têm células cinza para conferir; as demais passaram nas duas checagens de alinhamento, mas também devem ser validadas pelo técnico municipal.</li>
+            <li><b>Validar a tradução para CNAE.</b> A tabela da seção 5 é um rascunho. A prefeitura costuma ter essa correspondência na parametrização da consulta de viabilidade; quando houver, ela prevalece.</li>
+            <li><b>Obter o mapa de zoneamento em formato digital</b> (Anexos da Lei 5.142/2021, de preferência em shapefile ou KML) para localizar as empresas existentes por zona.</li>
+            <li><b>Escolher os CNAEs-alvo</b> a partir da seção 1: as divisões em que as referências de caminho têm mais emprego e que façam sentido para a vocação do município.</li>
+            <li><b>Ver onde eles cabem</b> na seção 2 e marcar os ajustes que abririam espaço, sempre com justificativa: proximidade de eixos viários, infraestrutura existente, convivência com áreas residenciais.</li>
+            <li><b>Levar a proposta ao rito próprio.</b> Mudança de zoneamento exige lei e participação; a ferramenta subsidia a decisão, não a substitui. A mesma matriz, validada, serve para a consulta automática de viabilidade.</li>
+          </ol>
+        </section>
+
+        <section id="cnae" class="sec">
+          <h2>5. Tradução das categorias de uso para a CNAE</h2>
+          <p class="note">Rascunho para validar. A lei classifica usos por atividade, porte e grau de incômodo; a CNAE classifica atividades. Por isso uma divisão pode aparecer em mais de uma categoria, e o porte do empreendimento continua decidindo qual regra vale.</p>
+          <div class="tw"><table class="t"><thead><tr><th>Categoria de uso na lei</th><th>Divisões da CNAE</th><th>Observação</th></tr></thead><tbody id="cnae-body"></tbody></table></div>
+          <details id="full" style="margin-top:1.2rem"><summary style="cursor:pointer;color:var(--gold-soft);font-family:Fraunces,Georgia,serif;font-size:1.1rem">Ver o quadro completo de usos por zona</summary><div id="full-matrix" style="margin-top:.8rem"></div></details>
+        </section>
+
+        <section id="limites" class="sec">
+          <h2>Limites desta versão</h2>
+          <div class="warn">
+            <p>O quadro de usos foi lido do PDF da <a href="https://cruzeiro.camarasempapel.com.br/Arquivo/Documents/legislacao/image/L51422021.pdf" rel="noopener" style="color:var(--gold-soft)">Lei nº 5.142/2021</a> por reconhecimento de texto. A coluna da Zona de Expansão Próxima vem sempre como Análise da Comissão, e a penúltima coluna (exigência de Estudo de Impacto de Vizinhança) sempre como sim ou não; essas duas regularidades foram usadas para checar o alinhamento de cada linha. A lei foi alterada pela <a href="https://cruzeiro.camarasempapel.com.br/Arquivo/Documents/legislacao/image/L53612023.pdf" rel="noopener" style="color:var(--gold-soft)">Lei nº 5.361/2023</a>, que acrescenta o art. 45-A e altera dispositivos dos arts. 26 (Zona de Preservação Natural) e 45; não foi verificado se ela muda os anexos.</p>
+            <p>Ainda não há mapa: sem os anexos cartográficos em formato digital, a ferramenta diz o que cabe em cada zona, mas não onde fica cada zona nem onde estão as empresas hoje. A sigla ZEVA aparece no quadro, mas o nome da zona não foi identificado no texto.</p>
+          </div>
+        </section>
+      </div>
+
+      <div class="view" id="v-con" hidden>
+        <h2>Conchal</h2>
+        
+      <div class="cards">
+        <div class="card"><div class="lab">Saldo em relação ao gêmeo</div><div class="big">−0,64 dp</div><div class="sub">Ajuste do gêmeo: bom</div></div>
+        <div class="card"><div class="lab">Especialização em 2024</div><div class="big" style="font-size:1.1rem">Agroindústria e indústria tradicional</div></div>
+        <div class="card"><div class="lab">Segmento-alavanca</div><div class="big" style="font-size:1.1rem">Agroindústria e indústria tradicional</div><div class="sub">+8,9 pontos percentuais do emprego nas referências</div></div>
+      </div>
+      <p class="note">Referências de caminho: Tabatinga, Elias Fausto, Taguaí, Santo Antônio de Posse, Guariba.</p>
+      <h3>Situação da lei de zoneamento</h3>
+      <p class="lede">A lei em vigor é a Lei Complementar nº 430, de 20 de julho de 2016, com sete anexos (mapas e quadros), publicada na <a href="https://www.conchal.sp.gov.br/departamentos/planejamento/plano-diretor/plano-diretor-estrategico" rel="noopener">página do Plano Diretor Estratégico da prefeitura</a>. O arquivo é uma digitalização sem camada de texto: antes de montar a matriz é preciso fazer o reconhecimento de texto (OCR) ou obter o arquivo original com a prefeitura.</p>
+      <h3>O que falta para entrar na ferramenta</h3>
+      <ol class="steps"><li><b>Obter a lei em texto</b> com o setor de Planejamento da prefeitura, ou passar OCR nos sete anexos.</li><li><b>Transcrever o quadro de usos por zona</b> e conferir com o técnico municipal.</li><li><b>Traduzir as categorias para CNAE</b> com a mesma tabela usada para Cruzeiro, ajustando o que for próprio de Conchal.</li><li><b>Priorizar agroindústria e indústria tradicional</b>, que é ao mesmo tempo a especialização e o segmento-alavanca do município.</li></ol>
+      </div>
+      <div class="view" id="v-mon" hidden>
+        <h2>Monte Aprazível</h2>
+        
+      <div class="cards">
+        <div class="card"><div class="lab">Saldo em relação ao gêmeo</div><div class="big">−0,82 dp</div><div class="sub">Ajuste do gêmeo: bom</div></div>
+        <div class="card"><div class="lab">Especialização em 2024</div><div class="big" style="font-size:1.1rem">Agro e bioeconomia primária</div></div>
+        <div class="card"><div class="lab">Segmento-alavanca</div><div class="big" style="font-size:1.1rem">Comércio e logística</div><div class="sub">+6,5 pontos percentuais do emprego nas referências</div></div>
+      </div>
+      <p class="note">Referências de caminho: Urupês, José Bonifácio, Águas da Prata, Santo Anastácio, São José do Rio Pardo.</p>
+      <h3>Situação da lei de zoneamento</h3>
+      <p class="lede">Não foi localizada lei de zoneamento em vigor publicada na internet. Em 2021 a prefeitura abriu contratação de serviços para elaborar o plano diretor e a lei de zoneamento; não foi possível confirmar se o trabalho foi concluído. É o caso de uso em que a ferramenta ajuda a desenhar as primeiras zonas econômicas, em vez de traduzir uma lei existente.</p>
+      <h3>O que falta para entrar na ferramenta</h3>
+      <ol class="steps"><li><b>Confirmar com a prefeitura</b> se o plano diretor e a lei de zoneamento contratados em 2021 foram aprovados.</li><li><b>Se não houver lei</b>, mapear onde já estão os estabelecimentos (endereços do CNEFE 2022 e do cadastro de empresas) para propor as primeiras zonas a partir do uso real do solo.</li><li><b>Desenhar uma zona de comércio e logística</b> ligada aos eixos viários, já que esse é o segmento-alavanca do município.</li><li><b>Usar a matriz de Cruzeiro como ponto de partida</b> das categorias de uso, adaptada ao porte de Monte Aprazível.</li></ol>
+      </div>
+    </div></section>
+
+    <section class="sources" id="fontes"><div class="wrap">
+      <h2>Fontes</h2>
+      <ul>
+        <li><b>Zoneamento de Cruzeiro:</b> <a href="https://cruzeiro.camarasempapel.com.br/Arquivo/Documents/legislacao/image/L51422021.pdf" rel="noopener">Lei Municipal nº 5.142, de 20 de dezembro de 2021</a> (uso e ocupação do solo urbano), Anexos I e II, e <a href="https://cruzeiro.camarasempapel.com.br/Arquivo/Documents/legislacao/image/L53612023.pdf" rel="noopener">Lei nº 5.361/2023</a>.</li>
+        <li><b>Zoneamento de Conchal:</b> <a href="https://www.conchal.sp.gov.br/departamentos/planejamento/plano-diretor/plano-diretor-estrategico" rel="noopener">Lei Complementar nº 430/2016 e anexos</a>.</li>
+        <li><b>Emprego formal por divisão da CNAE em 2024:</b> IBGE, Cadastro Central de Empresas, <a href="https://sidra.ibge.gov.br/tabela/9528" rel="noopener">tabela 9528 do SIDRA</a>.</li>
+        <li><b>Gêmeo, referências e segmento-alavanca:</b> painel <a href="../gemeos-de-desenvolvimento/">Gêmeos de desenvolvimento dos municípios paulistas</a>.</li>
+      </ul>
+      <p class="cite">Como citar: SERDEIRA, Amiris de Paula. Zonas de desenvolvimento: zoneamento municipal lido em CNAE. São Paulo, 2026. Disponível em: https://amirisdepaulaserdeira.github.io/paineis/zonas-de-desenvolvimento/</p>
+    </div></section>
+  </main>
+  <footer class="site"><div class="wrap">
+    <span class="sig">Da evidência à execução.</span>
+    <small>Amiris de Paula Serdeira · Gestora pública, pesquisadora e economista · São Paulo, Brasil</small>
+  </div></footer>
+  <script type="application/json" id="zd-data">{"zonas":[{"id":"ZR","nome":"Zona Residencial"},{"id":"ZIM","nome":"Zona de Interesse da Mantiqueira"},{"id":"ZC1","nome":"Zona Comercial 1"},{"id":"ZC2","nome":"Zona Comercial 2"},{"id":"ZVP","nome":"Zona de Vias de Penetração"},{"id":"ZEP","nome":"Zona de Expansão Próxima"},{"id":"ZLI","nome":"Zona de Logística e Industrial"},{"id":"ZDC","nome":"Zona de Desenvolvimento Comercial"},{"id":"ZIP1","nome":"Zona de Interesse de Preservação 1"},{"id":"ZIP2","nome":"Zona de Interesse de Preservação 2"},{"id":"ZIP3","nome":"Zona de Interesse de Preservação 3"},{"id":"ZIP4","nome":"Zona de Interesse de Preservação 4"},{"id":"ZVA1","nome":"Zona de Via de Acesso 1"},{"id":"ZVA2","nome":"Zona de Via de Acesso 2"},{"id":"ZVA3","nome":"Zona de Via de Acesso 3"},{"id":"ZVA4","nome":"Zona de Via de Acesso 4"},{"id":"ZVA5","nome":"Zona de Via de Acesso 5"},{"id":"ZVA6","nome":"Zona de Via de Acesso 6"},{"id":"ZVA7","nome":"Zona de Via de Acesso 7"},{"id":"ZEIS","nome":"Zona Especial de Interesse Social"},{"id":"ZEVA","nome":"ZEVA (nome não identificado no texto da lei)"}],"linhas":[{"id":"res_uni","grupo":"Residencial","nome":"Unifamiliar","macros":[],"cnae":[],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PR","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"res_gem","grupo":"Residencial","nome":"Geminadas","macros":[],"cnae":[],"nota":"","st":{"ZR":"PE","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PR","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PR"},"conferir":false},{"id":"res_vil","grupo":"Residencial","nome":"Vilas","macros":[],"cnae":[],"nota":"","st":{"ZR":"PE","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PR","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PR"},"conferir":false},{"id":"res_cond","grupo":"Residencial","nome":"Multifamiliar em condomínio","macros":[],"cnae":[],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PR","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"res_lot","grupo":"Residencial","nome":"Condomínio de lotes","macros":[],"cnae":[],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PR","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"res_apto","grupo":"Residencial","nome":"Prédio de apartamentos","macros":[],"cnae":[],"nota":"","st":{"ZR":"PE","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PR","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PR"},"conferir":false},{"id":"var_cot_p","grupo":"Comércio e serviços","nome":"Varejo cotidiano, pequeno porte","macros":["comlog"],"cnae":["47"],"nota":"Supermercados, mercearias, padarias, açougues, farmácias (grupos 47.1, 47.2 e 47.71).","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"AC","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"var_cot_g","grupo":"Comércio e serviços","nome":"Varejo cotidiano, médio e grande porte","macros":["comlog"],"cnae":["47"],"nota":"Hiper e supermercados de maior porte (grupo 47.1).","st":{"ZR":"?","ZIM":"?","ZC1":"?","ZC2":"?","ZVP":"?","ZEP":"?","ZLI":"?","ZDC":"?","ZIP1":"?","ZIP2":"?","ZIP3":"?","ZIP4":"?","ZVA1":"?","ZVA2":"?","ZVA3":"?","ZVA4":"?","ZVA5":"?","ZVA6":"?","ZVA7":"?","ZEIS":"?","EIV":"?","ZEVA":"?"},"conferir":true},{"id":"var_eve_p","grupo":"Comércio e serviços","nome":"Varejo eventual, pequeno porte","macros":["comlog"],"cnae":["47"],"nota":"Vestuário, calçados, eletrodomésticos, livrarias e afins (grupos 47.5, 47.6 e 47.8).","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"AC","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"var_eve_g","grupo":"Comércio e serviços","nome":"Varejo eventual, médio e grande porte","macros":["comlog"],"cnae":["47"],"nota":"","st":{"ZR":"DT","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"AC","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PR"},"conferir":false},{"id":"var_esp_p","grupo":"Comércio e serviços","nome":"Varejo esporádico, pequeno porte","macros":["comlog"],"cnae":["45","47"],"nota":"Material de construção, móveis, veículos (grupos 47.4, 47.54 e 45.1).","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"AC","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"var_esp_g","grupo":"Comércio e serviços","nome":"Varejo esporádico, médio e grande porte","macros":["comlog"],"cnae":["45","47"],"nota":"","st":{"ZR":"DT","ZIM":"AC","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"AC","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"AC"},"conferir":false},{"id":"cons_pri","grupo":"Comércio e serviços","nome":"Consumo local: alimentação primária","macros":["turcult"],"cnae":["56"],"nota":"Lanchonetes, cafés, restaurantes de bairro (divisão 56).","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"cons_sec","grupo":"Comércio e serviços","nome":"Consumo local: alimentação secundária","macros":["turcult"],"cnae":["56"],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"especial","grupo":"Comércio e serviços","nome":"Comércio especializado","macros":["comlog"],"cnae":["47"],"nota":"A lei não detalha; tradução provisória para varejo especializado (divisão 47).","st":{"ZR":"PR","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PR"},"conferir":false},{"id":"complexo","grupo":"Comércio e serviços","nome":"Complexos comerciais","macros":["comlog"],"cnae":["47","68"],"nota":"Shopping centers e galerias: não há um CNAE próprio; depende das lojas.","st":{"ZR":"PR","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PR","ZIP4":"AC","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PR"},"conferir":false},{"id":"ambulante","grupo":"Comércio e serviços","nome":"Ambulante","macros":["comlog"],"cnae":["47"],"nota":"","st":{"ZR":"PR","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"AC","ZIP2":"AC","ZIP3":"AC","ZIP4":"AC","ZVA1":"PR","ZVA2":"PR","ZVA3":"PR","ZVA4":"PR","ZVA5":"PR","ZVA6":"PR","ZVA7":"PR","ZEIS":"AC","EIV":"NÃO","ZEVA":"PR"},"conferir":false},{"id":"atac_ali","grupo":"Comércio e serviços","nome":"Atacado de bebidas e alimentos","macros":["comlog"],"cnae":["46"],"nota":"Grupo 46.3.","st":{"ZR":"PR","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"atac_p","grupo":"Comércio e serviços","nome":"Atacado, pequeno porte","macros":["comlog"],"cnae":["46"],"nota":"Grupos 46.4 a 46.9. O primeiro valor da linha não foi lido no OCR.","st":{"ZR":"?","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PR"},"conferir":false},{"id":"atac_g","grupo":"Comércio e serviços","nome":"Atacado, médio e grande porte","macros":["comlog"],"cnae":["46"],"nota":"","st":{"ZR":"PR","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PR"},"conferir":false},{"id":"atac_per","grupo":"Comércio e serviços","nome":"Atacado de produtos perigosos","macros":["comlog"],"cnae":["46"],"nota":"Combustíveis e químicos (grupo 46.8).","st":{"ZR":"PR","ZIM":"PR","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PE","ZDC":"?","ZIP1":"?","ZIP2":"?","ZIP3":"?","ZIP4":"?","ZVA1":"?","ZVA2":"?","ZVA3":"?","ZVA4":"?","ZVA5":"?","ZVA6":"?","ZVA7":"?","ZEIS":"?","EIV":"?","ZEVA":"?"},"conferir":true},{"id":"atac_agro","grupo":"Comércio e serviços","nome":"Atacado de produtos agropecuários","macros":["comlog","agro"],"cnae":["46"],"nota":"Grupo 46.2.","st":{"ZR":"PR","ZIM":"PR","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PE","ZDC":"?","ZIP1":"?","ZIP2":"?","ZIP3":"?","ZIP4":"?","ZVA1":"?","ZVA2":"?","ZVA3":"?","ZVA4":"?","ZVA5":"?","ZVA6":"?","ZVA7":"?","ZEIS":"?","EIV":"?","ZEVA":"?"},"conferir":true},{"id":"atac_suc","grupo":"Comércio e serviços","nome":"Atacado de sucatas","macros":["comlog"],"cnae":["46"],"nota":"Classe 46.87.","st":{"ZR":"PR","ZIM":"PR","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PE","ZDC":"?","ZIP1":"?","ZIP2":"?","ZIP3":"?","ZIP4":"?","ZVA1":"?","ZVA2":"?","ZVA3":"?","ZVA4":"?","ZVA5":"?","ZVA6":"?","ZVA7":"?","ZEIS":"?","EIV":"?","ZEVA":"?"},"conferir":true},{"id":"armaz","grupo":"Comércio e serviços","nome":"Armazenagem e depósito","macros":["comlog"],"cnae":["52"],"nota":"Grupo 52.1.","st":{"ZR":"PR","ZIM":"PE","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PE","ZDC":"?","ZIP1":"?","ZIP2":"?","ZIP3":"?","ZIP4":"?","ZVA1":"?","ZVA2":"?","ZVA3":"?","ZVA4":"?","ZVA5":"?","ZVA6":"?","ZVA7":"?","ZEIS":"?","EIV":"?","ZEVA":"?"},"conferir":true},{"id":"transp","grupo":"Comércio e serviços","nome":"Garagens e transportadoras","macros":["comlog"],"cnae":["49","52"],"nota":"Transporte rodoviário de carga (49.3) e logística (52.5).","st":{"ZR":"PR","ZIM":"PR","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PE","ZDC":"?","ZIP1":"?","ZIP2":"?","ZIP3":"?","ZIP4":"?","ZVA1":"?","ZVA2":"?","ZVA3":"?","ZVA4":"?","ZVA5":"?","ZVA6":"?","ZVA7":"?","ZEIS":"?","EIV":"?","ZEVA":"?"},"conferir":true},{"id":"abast","grupo":"Comércio e serviços","nome":"Abastecimento de veículos","macros":["comlog"],"cnae":["47"],"nota":"Postos de combustível (grupo 47.3).","st":{"ZR":"PR","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"estac","grupo":"Comércio e serviços","nome":"Estacionamento","macros":["comlog"],"cnae":["52"],"nota":"Classe 52.23.","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PR","ZIP2":"PE","ZIP3":"PR","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"ofic1","grupo":"Comércio e serviços","nome":"Oficinas, tipo I","macros":["comlog"],"cnae":["45","95"],"nota":"Manutenção de veículos (45.2) e reparação (95).","st":{"ZR":"PR","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PR"},"conferir":false},{"id":"ofic2","grupo":"Comércio e serviços","nome":"Oficinas, tipo II","macros":["comlog","ind_tec"],"cnae":["45","33"],"nota":"Inclui manutenção industrial (33).","st":{"ZR":"PR","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PR"},"conferir":false},{"id":"domic","grupo":"Comércio e serviços","nome":"Profissionais domiciliares","macros":["cuidado"],"cnae":["96"],"nota":"Cabeleireiros, costureiras e serviços pessoais (divisão 96).","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"?","ZIP1":"?","ZIP2":"?","ZIP3":"?","ZIP4":"?","ZVA1":"?","ZVA2":"?","ZVA3":"?","ZVA4":"?","ZVA5":"?","ZVA6":"?","ZVA7":"?","ZEIS":"?","EIV":"?","ZEVA":"?"},"conferir":true},{"id":"escrit","grupo":"Comércio e serviços","nome":"Negócios e escritórios","macros":["conhec"],"cnae":["58","59","60","61","62","63","64","65","66","68","70","72","73","77","78","79","80","81","82"],"nota":"Tecnologia da informação, finanças, consultoria, publicidade, serviços às empresas.","st":{"ZR":"PE","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"?","ZIP1":"?","ZIP2":"?","ZIP3":"?","ZIP4":"?","ZVA1":"?","ZVA2":"?","ZVA3":"?","ZVA4":"?","ZVA5":"?","ZVA6":"?","ZVA7":"?","ZEIS":"?","EIV":"?","ZEVA":"?"},"conferir":true},{"id":"liberais","grupo":"Comércio e serviços","nome":"Autônomos e liberais","macros":["conhec"],"cnae":["69","71","74","75"],"nota":"Advocacia, contabilidade, engenharia e arquitetura, veterinária.","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"?","ZIP1":"?","ZIP2":"?","ZIP3":"?","ZIP4":"?","ZVA1":"?","ZVA2":"?","ZVA3":"?","ZVA4":"?","ZVA5":"?","ZVA6":"?","ZVA7":"?","ZEIS":"?","EIV":"?","ZEVA":"?"},"conferir":true},{"id":"hoteis","grupo":"Comércio e serviços","nome":"Hotéis","macros":["turcult"],"cnae":["55"],"nota":"Linha longa só de PE no OCR: a contagem foi normalizada.","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"pensoes","grupo":"Comércio e serviços","nome":"Pensões e albergues","macros":["turcult"],"cnae":["55"],"nota":"Linha longa só de PE no OCR: a contagem foi normalizada.","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"moteis","grupo":"Comércio e serviços","nome":"Motéis","macros":["turcult"],"cnae":["55"],"nota":"","st":{"ZR":"PR","ZIM":"PE","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PR","ZVA6":"PR","ZVA7":"PR","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"div_ger","grupo":"Comércio e serviços","nome":"Diversões em geral","macros":["turcult"],"cnae":["90","92","93"],"nota":"","st":{"ZR":"PR","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"div_not","grupo":"Comércio e serviços","nome":"Diversões noturnas","macros":["turcult"],"cnae":["56","90","93"],"nota":"","st":{"ZR":"PR","ZIM":"AC","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"AC"},"conferir":false},{"id":"adm","grupo":"Institucional","nome":"Administração e serviço público","macros":["admpub"],"cnae":["84"],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"assist","grupo":"Institucional","nome":"Assistência social","macros":["cuidado"],"cnae":["87","88"],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"cultura","grupo":"Institucional","nome":"Cultura","macros":["turcult"],"cnae":["90","91"],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"praca","grupo":"Institucional","nome":"Lazer: praças e bosques","macros":["turcult"],"cnae":["93"],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"estadio","grupo":"Institucional","nome":"Lazer: estádios e ginásios","macros":["turcult"],"cnae":["93"],"nota":"","st":{"ZR":"PR","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PR","ZIP3":"PR","ZIP4":"PE","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"creche","grupo":"Institucional","nome":"Educação: creche e educação infantil","macros":["cuidado"],"cnae":["85"],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"ens1","grupo":"Institucional","nome":"Educação: ensino de 1º grau","macros":["cuidado"],"cnae":["85"],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"ens2","grupo":"Institucional","nome":"Educação: ensino de 2º grau","macros":["cuidado"],"cnae":["85"],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"enssup","grupo":"Institucional","nome":"Educação: ensino superior","macros":["cuidado"],"cnae":["85"],"nota":"","st":{"ZR":"DT","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"ensnser","grupo":"Institucional","nome":"Educação: ensino não seriado","macros":["cuidado"],"cnae":["85"],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"clinica","grupo":"Institucional","nome":"Saúde: clínica sem internação","macros":["cuidado"],"cnae":["86"],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"hospital","grupo":"Institucional","nome":"Saúde: hospital e pronto-socorro","macros":["cuidado"],"cnae":["86"],"nota":"","st":{"ZR":"PR","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"posto","grupo":"Institucional","nome":"Saúde: posto de saúde","macros":["cuidado"],"cnae":["86"],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PE","ZIP1":"PE","ZIP2":"PE","ZIP3":"PE","ZIP4":"PE","ZVA1":"PE","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"NÃO","ZEVA":"PE"},"conferir":false},{"id":"infecto","grupo":"Institucional","nome":"Saúde: doenças infectocontagiosas","macros":["cuidado"],"cnae":["86"],"nota":"","st":{"ZR":"PR","ZIM":"PR","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PR","ZVA3":"PE","ZVA4":"PR","ZVA5":"PR","ZVA6":"PR","ZVA7":"PR","ZEIS":"AC","EIV":"SIM","ZEVA":"AC"},"conferir":false},{"id":"cemit","grupo":"Institucional","nome":"Cemitério","macros":["cuidado"],"cnae":["96"],"nota":"","st":{"ZR":"PR","ZIM":"PR","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PR","ZVA3":"PE","ZVA4":"PR","ZVA5":"PR","ZVA6":"PR","ZVA7":"PR","ZEIS":"AC","EIV":"SIM","ZEVA":"DT"},"conferir":false},{"id":"funer","grupo":"Institucional","nome":"Funerária e velório","macros":["cuidado"],"cnae":["96"],"nota":"","st":{"ZR":"PR","ZIM":"PR","ZC1":"PR","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PE","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"AC"},"conferir":false},{"id":"matad","grupo":"Institucional","nome":"Matadouro","macros":["ind_trad"],"cnae":["10"],"nota":"Abate de animais (grupo 10.1).","st":{"ZR":"PR","ZIM":"PR","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PE","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PR","ZVA3":"PE","ZVA4":"PR","ZVA5":"PR","ZVA6":"PR","ZVA7":"PR","ZEIS":"AC","EIV":"SIM","ZEVA":"AC"},"conferir":false},{"id":"relig_p","grupo":"Institucional","nome":"Templos, pequeno porte","macros":[],"cnae":["94"],"nota":"","st":{"ZR":"PE","ZIM":"PE","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"relig_g","grupo":"Institucional","nome":"Templos, médio e grande porte","macros":[],"cnae":["94"],"nota":"","st":{"ZR":"DT","ZIM":"AC","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"AC"},"conferir":false},{"id":"ind1p","grupo":"Industrial","nome":"Industrial I-1, pequeno porte","macros":["ind_trad","ind_tec"],"cnae":["10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33"],"nota":"O tipo (I-1, I-2, I-3) depende do grau de incômodo definido no Anexo IV, não da divisão da CNAE.","st":{"ZR":"DT","ZIM":"AC","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"AC"},"conferir":false},{"id":"ind1m","grupo":"Industrial","nome":"Industrial I-1, médio porte","macros":["ind_trad","ind_tec"],"cnae":["10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33"],"nota":"","st":{"ZR":"DT","ZIM":"AC","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PR","ZVA3":"PE","ZVA4":"PE","ZVA5":"PR","ZVA6":"PR","ZVA7":"PR","ZEIS":"AC","EIV":"SIM","ZEVA":"AC"},"conferir":false},{"id":"ind1g","grupo":"Industrial","nome":"Industrial I-1, grande porte","macros":["ind_trad","ind_tec"],"cnae":["10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33"],"nota":"","st":{"ZR":"DT","ZIM":"AC","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PR","ZVA3":"PE","ZVA4":"PE","ZVA5":"PR","ZVA6":"PR","ZVA7":"PR","ZEIS":"AC","EIV":"SIM","ZEVA":"AC"},"conferir":false},{"id":"ind2","grupo":"Industrial","nome":"Industrial I-2","macros":["ind_trad","ind_tec"],"cnae":["10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33"],"nota":"","st":{"ZR":"DT","ZIM":"AC","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PE","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PR","ZVA3":"PE","ZVA4":"PE","ZVA5":"PR","ZVA6":"PR","ZVA7":"PR","ZEIS":"AC","EIV":"SIM","ZEVA":"AC"},"conferir":false},{"id":"ind3","grupo":"Industrial","nome":"Industrial I-3","macros":["ind_trad","ind_tec"],"cnae":["10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33"],"nota":"","st":{"ZR":"DT","ZIM":"AC","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PE","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PR","ZVA3":"PE","ZVA4":"PE","ZVA5":"PR","ZVA6":"PR","ZVA7":"PR","ZEIS":"AC","EIV":"SIM","ZEVA":"AC"},"conferir":false},{"id":"mix_rc","grupo":"Uso misto","nome":"Residencial com comércio, serviços ou confecção de pequeno porte","macros":["ind_trad","comlog"],"cnae":["14","47","96"],"nota":"Inclui confecções de pequeno porte (divisão 14).","st":{"ZR":"PE","ZIM":"PR","ZC1":"PE","ZC2":"PE","ZVP":"PE","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PR","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"mix_ri","grupo":"Uso misto","nome":"Residencial com indústria","macros":["ind_trad","ind_tec"],"cnae":["10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33"],"nota":"","st":{"ZR":"PR","ZIM":"PR","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PR","ZDC":"PR","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PR","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false},{"id":"mix_ic","grupo":"Uso misto","nome":"Indústria com comércio ou serviços","macros":["ind_trad","ind_tec","comlog"],"cnae":["10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33"],"nota":"","st":{"ZR":"PR","ZIM":"PR","ZC1":"PR","ZC2":"PR","ZVP":"PR","ZEP":"AC","ZLI":"PE","ZDC":"PE","ZIP1":"PR","ZIP2":"PR","ZIP3":"PR","ZIP4":"PR","ZVA1":"PR","ZVA2":"PE","ZVA3":"PE","ZVA4":"PR","ZVA5":"PE","ZVA6":"PE","ZVA7":"PE","ZEIS":"AC","EIV":"SIM","ZEVA":"PE"},"conferir":false}],"divisoes":[{"div":"01","nome":"Agricultura, pecuária e serviços relacionados","emp":373,"pct":1.5615841915766557,"gemeo":4.608676185085123,"refs":5.5720607044335235,"macro":"agro"},{"div":"02","nome":"Produção florestal","emp":null,"pct":null,"gemeo":0.4457498792758626,"refs":0.4557235331642356,"macro":"agro"},{"div":"03","nome":"Pesca e aquicultura","emp":null,"pct":null,"gemeo":0.07447390739597419,"refs":0.051245484861634896,"macro":"agro"},{"div":"05","nome":"Extração de carvão mineral","emp":0,"pct":0,"gemeo":0.0,"refs":0.0,"macro":"extr"},{"div":"06","nome":"Extração de petróleo e gás natural","emp":0,"pct":0,"gemeo":0.0,"refs":0.0,"macro":"extr"},{"div":"07","nome":"Extração de minerais metálicos","emp":0,"pct":0,"gemeo":0.0,"refs":0.0,"macro":"extr"},{"div":"08","nome":"Extração de minerais não-metálicos","emp":null,"pct":null,"gemeo":0.46167568270372694,"refs":0.15569254663220305,"macro":"extr"},{"div":"09","nome":"Atividades de apoio à extração de minerais","emp":0,"pct":0,"gemeo":0.0,"refs":0.0,"macro":"extr"},{"div":"10","nome":"Fabricação de produtos alimentícios","emp":346,"pct":1.4485472661810266,"gemeo":8.674060897309598,"refs":5.073241706443009,"macro":"ind_trad"},{"div":"11","nome":"Fabricação de bebidas","emp":null,"pct":null,"gemeo":0.26658519066594555,"refs":0.19109427034844212,"macro":"ind_trad"},{"div":"12","nome":"Fabricação de produtos do fumo","emp":0,"pct":0,"gemeo":0.030246269357550475,"refs":0.0,"macro":"ind_trad"},{"div":"13","nome":"Fabricação de produtos têxteis","emp":5,"pct":0.020932763962153562,"gemeo":2.5844621745212444,"refs":0.09166030182768976,"macro":"ind_trad"},{"div":"14","nome":"Confecção de artigos do vestuário e acessórios","emp":32,"pct":0.1339696893577828,"gemeo":0.4613751554615111,"refs":0.4578629319086258,"macro":"ind_trad"},{"div":"15","nome":"Preparação de couros e fabricação de artefatos de couro,","emp":null,"pct":null,"gemeo":3.6071799349948965,"refs":0.04872587217922583,"macro":"ind_trad"},{"div":"16","nome":"Fabricação de produtos de madeira","emp":46,"pct":0.19258142845181278,"gemeo":0.031737528009520496,"refs":0.5819625836114837,"macro":"ind_trad"},{"div":"17","nome":"Fabricação de celulose, papel e produtos de papel","emp":297,"pct":1.2434061793519215,"gemeo":1.9909832285096831,"refs":0.4248300756065905,"macro":"ind_trad"},{"div":"18","nome":"Impressão e reprodução de gravações","emp":26,"pct":0.10885037260319852,"gemeo":0.19178982122981053,"refs":0.1284109630662048,"macro":"ind_trad"},{"div":"19","nome":"Fabricação de coque, de produtos derivados do petróleo e","emp":0,"pct":0,"gemeo":0.0,"refs":0.004559028015227153,"macro":"ind_tec"},{"div":"20","nome":"Fabricação de produtos químicos","emp":178,"pct":0.7452063970526668,"gemeo":0.8139837660344692,"refs":0.5902500021165027,"macro":"ind_tec"},{"div":"21","nome":"Fabricação de produtos farmoquímicos e farmacêuticos","emp":null,"pct":null,"gemeo":0.023181478311154698,"refs":0.15298784541153707,"macro":"ind_tec"},{"div":"22","nome":"Fabricação de produtos de borracha e de material plástico","emp":null,"pct":null,"gemeo":1.090124010667136,"refs":0.5227055544929913,"macro":"ind_tec"},{"div":"23","nome":"Fabricação de produtos de minerais não-metálicos","emp":65,"pct":0.2721259315079963,"gemeo":1.174803661790673,"refs":0.5939986181700818,"macro":"ind_trad"},{"div":"24","nome":"Metalurgia","emp":null,"pct":null,"gemeo":0.7329636038029674,"refs":0.3213004603395173,"macro":"ind_tec"},{"div":"25","nome":"Fabricação de produtos de metal, exceto máquinas e equipa","emp":387,"pct":1.6201959306706857,"gemeo":1.3283798837034453,"refs":0.8156050657055948,"macro":"ind_tec"},{"div":"26","nome":"Fabricação de equipamentos de informática, produtos eletr","emp":0,"pct":0,"gemeo":0.15089860574117106,"refs":0.07473973137065534,"macro":"ind_tec"},{"div":"27","nome":"Fabricação de máquinas, aparelhos e materiais elétricos","emp":0,"pct":0,"gemeo":1.1846967586698434,"refs":0.5922318030335217,"macro":"ind_tec"},{"div":"28","nome":"Fabricação de máquinas e equipamentos","emp":93,"pct":0.38934940969605625,"gemeo":0.9143360718739268,"refs":0.8802049679418668,"macro":"ind_tec"},{"div":"29","nome":"Fabricação de veículos automotores, reboques e carroceria","emp":4917,"pct":20.585280080381814,"gemeo":0.21296648845559338,"refs":3.003679091534167,"macro":"ind_tec"},{"div":"30","nome":"Fabricação de outros equipamentos de transporte, exceto v","emp":null,"pct":null,"gemeo":0.03896870106104323,"refs":0.969905436997064,"macro":"ind_tec"},{"div":"31","nome":"Fabricação de móveis","emp":24,"pct":0.1004772670183371,"gemeo":0.3368877937191138,"refs":1.1681635642503458,"macro":"ind_trad"},{"div":"32","nome":"Fabricação de produtos diversos","emp":9,"pct":0.037678975131876416,"gemeo":0.27064712871998275,"refs":0.15908157738326956,"macro":"ind_trad"},{"div":"33","nome":"Manutenção, reparação e instalação de máquinas e equipame","emp":306,"pct":1.281085154483798,"gemeo":1.0213922747509174,"refs":0.3572050238549176,"macro":"ind_tec"},{"div":"35","nome":"Eletricidade, gás e outras utilidades","emp":null,"pct":null,"gemeo":0.36960486779864177,"refs":0.2678437578172349,"macro":"infra"},{"div":"36","nome":"Captação, tratamento e distribuição de água","emp":null,"pct":null,"gemeo":0.1048361230209738,"refs":0.15776622058730258,"macro":"infra"},{"div":"37","nome":"Esgoto e atividades relacionadas","emp":0,"pct":0,"gemeo":0.00044856036268740607,"refs":null,"macro":"infra"},{"div":"38","nome":"Coleta, tratamento e disposição de resíduos; recuperação","emp":null,"pct":null,"gemeo":0.8223459363046689,"refs":0.43304543664449385,"macro":"infra"},{"div":"39","nome":"Descontaminação e outros serviços de gestão de resíduos","emp":0,"pct":0,"gemeo":0.0,"refs":0.0,"macro":"infra"},{"div":"41","nome":"Construção de edifícios","emp":264,"pct":1.1052499372017082,"gemeo":0.8172708567157704,"refs":1.4521515441626058,"macro":"infra"},{"div":"42","nome":"Obras de infraestrutura","emp":157,"pct":0.6572887884116219,"gemeo":1.1212889627584148,"refs":0.5133298083436165,"macro":"infra"},{"div":"43","nome":"Serviços especializados para construção","emp":115,"pct":0.48145357112953197,"gemeo":1.0453065446493859,"refs":1.1536489859223615,"macro":"infra"},{"div":"45","nome":"Comércio e reparação de veículos automotores e motociclet","emp":458,"pct":1.9174411789332664,"gemeo":2.2139836322473587,"refs":2.9243568803732387,"macro":"comlog"},{"div":"46","nome":"Comércio por atacado, exceto veículos automotores e motoc","emp":588,"pct":2.461693041949259,"gemeo":3.2585866808721993,"refs":2.43600418322555,"macro":"comlog"},{"div":"47","nome":"Comércio varejista","emp":3984,"pct":16.67922632504396,"gemeo":13.230444529807604,"refs":15.134363163940126,"macro":"comlog"},{"div":"49","nome":"Transporte terrestre","emp":502,"pct":2.1016495018002175,"gemeo":4.622812317217139,"refs":2.669491717085249,"macro":"comlog"},{"div":"50","nome":"Transporte aquaviário","emp":0,"pct":0,"gemeo":0.0,"refs":0.0,"macro":"comlog"},{"div":"51","nome":"Transporte aéreo","emp":0,"pct":0,"gemeo":0.0,"refs":0.0,"macro":"comlog"},{"div":"52","nome":"Armazenamento e atividades auxiliares dos transportes","emp":56,"pct":0.2344469563761199,"gemeo":0.8593325385747171,"refs":0.48956258100999683,"macro":"comlog"},{"div":"53","nome":"Correio e outras atividades de entrega","emp":41,"pct":0.1716486644896592,"gemeo":0.14221080446789414,"refs":0.10678405557345527,"macro":"comlog"},{"div":"55","nome":"Alojamento","emp":60,"pct":0.25119316754584275,"gemeo":0.5386446836345841,"refs":0.5397376924110544,"macro":"turcult"},{"div":"56","nome":"Alimentação","emp":720,"pct":3.014318010550113,"gemeo":2.7639630315801624,"refs":3.317582869568338,"macro":"turcult"},{"div":"58","nome":"Edição e edição integrada à impressão","emp":11,"pct":0.04605208071673784,"gemeo":0.057741561921656616,"refs":0.08383965571381741,"macro":"conhec"},{"div":"59","nome":"Atividades cinematográficas, produção de vídeos e de prog","emp":10,"pct":0.041865527924307123,"gemeo":0.04762458375404796,"refs":0.10308313435499361,"macro":"conhec"},{"div":"60","nome":"Atividades de rádio e de televisão","emp":13,"pct":0.05442518630159926,"gemeo":0.08177685018158512,"refs":0.08723316116104393,"macro":"conhec"},{"div":"61","nome":"Telecomunicações","emp":65,"pct":0.2721259315079963,"gemeo":0.25371771813287664,"refs":0.4281159087530798,"macro":"conhec"},{"div":"62","nome":"Atividades dos serviços de tecnologia da informação","emp":68,"pct":0.28468558988528847,"gemeo":0.9518370350851637,"refs":0.4863697381375308,"macro":"conhec"},{"div":"63","nome":"Atividades de prestação de serviços de informação","emp":42,"pct":0.17583521728208992,"gemeo":0.11846061515572381,"refs":0.15696527592021609,"macro":"conhec"},{"div":"64","nome":"Atividades de serviços financeiros","emp":191,"pct":0.7996315833542661,"gemeo":0.7376819755740114,"refs":1.1280036842680803,"macro":"conhec"},{"div":"65","nome":"Seguros, resseguros, previdência complementar e planos de","emp":2,"pct":0.008373105584861425,"gemeo":0.13218644211935454,"refs":0.16853872445237483,"macro":"conhec"},{"div":"66","nome":"Atividades auxiliares dos serviços financeiros, seguros,","emp":54,"pct":0.22607385079125847,"gemeo":0.42039252858138976,"refs":0.4133185116189796,"macro":"conhec"},{"div":"68","nome":"Atividades imobiliárias","emp":173,"pct":0.7242736330905133,"gemeo":0.7698636591329584,"refs":1.1464471080363738,"macro":"conhec"},{"div":"69","nome":"Atividades jurídicas, de contabilidade e de auditoria","emp":246,"pct":1.0298919869379553,"gemeo":0.8515474254610592,"refs":1.1814089634390466,"macro":"conhec"},{"div":"70","nome":"Atividades de sedes de empresas e de consultoria em gestã","emp":51,"pct":0.21351419241396635,"gemeo":0.239536657447299,"refs":0.29225232740321483,"macro":"conhec"},{"div":"71","nome":"Serviços de arquitetura e engenharia; testes e análises t","emp":81,"pct":0.33911077618688773,"gemeo":0.7935128918752119,"refs":0.7346638665405762,"macro":"conhec"},{"div":"72","nome":"Pesquisa e desenvolvimento científico","emp":null,"pct":null,"gemeo":0.012056281292863352,"refs":0.1109662435371798,"macro":"conhec"},{"div":"73","nome":"Publicidade e pesquisa de mercado","emp":61,"pct":0.25537972033827344,"gemeo":0.2543283098092355,"refs":0.3778705696937608,"macro":"conhec"},{"div":"74","nome":"Outras atividades profissionais, científicas e técnicas","emp":51,"pct":0.21351419241396635,"gemeo":0.3207176967623801,"refs":0.31599465572690666,"macro":"conhec"},{"div":"75","nome":"Atividades veterinárias","emp":null,"pct":null,"gemeo":0.06635067287447716,"refs":0.18736676996811488,"macro":"conhec"},{"div":"77","nome":"Aluguéis não-imobiliários e gestão de ativos intangíveis","emp":64,"pct":0.2679393787155656,"gemeo":0.4539636754121998,"refs":0.7998375696170784,"macro":"conhec"},{"div":"78","nome":"Seleção, agenciamento e locação de mão-de-obra","emp":171,"pct":0.7159005275056518,"gemeo":0.4308849369218386,"refs":1.4976655625022985,"macro":"conhec"},{"div":"79","nome":"Agências de viagens, operadores turísticos e serviços de","emp":18,"pct":0.07535795026375283,"gemeo":0.09777632144158953,"refs":0.10615406768165112,"macro":"conhec"},{"div":"80","nome":"Atividades de vigilância, segurança e investigação","emp":54,"pct":0.22607385079125847,"gemeo":0.5231768143999985,"refs":0.601939036257245,"macro":"conhec"},{"div":"81","nome":"Serviços para edifícios e atividades paisagísticas","emp":124,"pct":0.5191325462614084,"gemeo":2.5727111690686915,"refs":2.4319032924304578,"macro":"conhec"},{"div":"82","nome":"Serviços de escritório, de apoio administrativo e outros","emp":371,"pct":1.5532110859917942,"gemeo":4.157417982120934,"refs":3.8750208741173777,"macro":"conhec"},{"div":"84","nome":"Administração pública, defesa e seguridade social","emp":2623,"pct":10.981327974545758,"gemeo":8.751924981501787,"refs":8.238473874138984,"macro":"admpub"},{"div":"85","nome":"Educação","emp":1210,"pct":5.0657288788411625,"gemeo":7.421318471604266,"refs":6.607608790835829,"macro":"cuidado"},{"div":"86","nome":"Atividades de atenção à saúde humana","emp":1485,"pct":6.217030896759608,"gemeo":5.529462058755792,"refs":9.466508344645575,"macro":"cuidado"},{"div":"87","nome":"Atividades de atenção à saúde humana integradas com assis","emp":46,"pct":0.19258142845181278,"gemeo":0.407758467931102,"refs":0.6133650029800759,"macro":"cuidado"},{"div":"88","nome":"Serviços de assistência social sem alojamento","emp":143,"pct":0.5986770493175919,"gemeo":0.3415688407351998,"refs":0.4401857085290559,"macro":"cuidado"},{"div":"90","nome":"Atividades artísticas, criativas e de espetáculos","emp":null,"pct":null,"gemeo":0.09170391131222153,"refs":0.0695014957681038,"macro":"turcult"},{"div":"91","nome":"Atividades ligadas ao patrimônio cultural e ambiental","emp":null,"pct":null,"gemeo":0.0,"refs":0.003171180313312615,"macro":"turcult"},{"div":"92","nome":"Atividades de exploração de jogos de azar e apostas","emp":0,"pct":0,"gemeo":0.0,"refs":0.0,"macro":"turcult"},{"div":"93","nome":"Atividades esportivas e de recreação e lazer","emp":163,"pct":0.6824081051662061,"gemeo":0.5396157849738471,"refs":0.8311141424259281,"macro":"turcult"},{"div":"94","nome":"Atividades de organizações associativas","emp":274,"pct":1.1471154651260151,"gemeo":1.3172396709396703,"refs":1.165306734969573,"macro":"cuidado"},{"div":"95","nome":"Reparação e manutenção de equipamentos de informática e c","emp":32,"pct":0.1339696893577828,"gemeo":0.2799379837399531,"refs":0.2071811782164496,"macro":"cuidado"},{"div":"96","nome":"Outras atividades de serviços pessoais","emp":97,"pct":0.4060956208657791,"gemeo":0.7933061404031347,"refs":0.4623624692278218,"macro":"cuidado"},{"div":"97","nome":"Serviços domésticos","emp":0,"pct":0,"gemeo":0.0,"refs":0.0,"macro":"cuidado"},{"div":"99","nome":"Organismos internacionais e outras instituições extraterr","emp":0,"pct":0,"gemeo":0.0,"refs":0.0,"macro":null}],"macros":{"agro":["01","02","03"],"extr":["05","06","07","08","09"],"ind_trad":["10","11","12","13","14","15","16","17","18","23","31","32"],"ind_tec":["19","20","21","22","24","25","26","27","28","29","30","33"],"infra":["35","36","37","38","39","41","42","43"],"comlog":["45","46","47","49","50","51","52","53"],"turcult":["55","56","90","91","92","93"],"conhec":["58","59","60","61","62","63","64","65","66","68","69","70","71","72","73","74","75","77","78","79","80","81","82"],"cuidado":["85","86","87","88","94","95","96","97"],"admpub":["84"]},"macro_nome":{"agro":"Agro e bioeconomia primária","extr":"Extrativa mineral","ind_trad":"Agroindústria e indústria tradicional","ind_tec":"Indústria de média e alta tecnologia","infra":"Infraestrutura, energia e construção","comlog":"Comércio e logística","turcult":"Turismo, cultura e economia criativa","conhec":"Serviços de conhecimento e às empresas","cuidado":"Cuidado e serviços sociais e pessoais","admpub":"Administração pública"},"direcao":{"nome":"Cruzeiro","gap_atual_dp":-1.5836,"ajuste":"bom","voc24":"Indústria de média e alta tecnologia","exc_voc24":22.6811,"alavanca":"Serviços de conhecimento e às empresas","alav_k":"conhec","alav_pp":8.2246,"po24":23886.0,"m24_ident":99.6483,"refs":["Votuporanga","Botucatu","Mogi das Cruzes","Andradina","Barretos"],"gemeo":[{"nome":"Andradina","peso":0.291},{"nome":"Lins","peso":0.257},{"nome":"Caieiras","peso":0.1868},{"nome":"Poá","peso":0.1865},{"nome":"Bebedouro","peso":0.0379},{"nome":"Pindamonhangaba","peso":0.032},{"nome":"Regente Feijó","peso":0.0087}],"macro":{"agro":{"mun":1.6662,"gemeo":4.2689,"refs":6.079,"estado":3.3304},"extr":{"mun":0.0,"gemeo":0.1588,"refs":0.1597,"estado":0.098},"ind_trad":{"mun":4.3749,"gemeo":17.6656,"refs":9.6649,"estado":6.2787},"ind_tec":{"mun":30.2688,"gemeo":6.156,"refs":7.6254,"estado":7.5877},"infra":{"mun":2.8469,"gemeo":4.4022,"refs":4.2986,"estado":5.5041},"comlog":{"mun":23.5661,"gemeo":24.3272,"refs":23.7903,"estado":24.8453},"turcult":{"mun":4.0317,"gemeo":3.8991,"refs":4.8052,"estado":4.9959},"conhec":{"mun":8.1512,"gemeo":14.1699,"refs":16.3758,"estado":25.9704},"cuidado":{"mun":13.7612,"gemeo":16.0896,"refs":18.9625,"estado":14.6024},"admpub":{"mun":10.9813,"gemeo":8.751,"refs":8.2385,"estado":6.7871}}},"total_emprego":23886,"outros":{"Conchal":{"nome":"Conchal","gap_atual_dp":-0.6373,"ajuste":"bom","voc24":"Agroindústria e indústria tradicional","exc_voc24":12.7359,"alavanca":"Agroindústria e indústria tradicional","alav_pp":8.8949,"refs":["Tabatinga","Elias Fausto","Taguaí","Santo Antônio de Posse","Guariba"]},"Monte Aprazível":{"nome":"Monte Aprazível","gap_atual_dp":-0.8176,"ajuste":"bom","voc24":"Agro e bioeconomia primária","exc_voc24":27.2547,"alavanca":"Comércio e logística","alav_pp":6.4696,"refs":["Urupês","José Bonifácio","Águas da Prata","Santo Anastácio","São José do Rio Pardo"]}}}</script>
+  <script>
+(() => {
+const D = JSON.parse(document.getElementById('zd-data').textContent);
+const ZONAS = D.zonas.map(z => z.id);
+const NZ = Object.fromEntries(D.zonas.map(z => [z.id, z.nome]));
+const ORD = { PE: 4, DT: 3, AC: 2, PR: 1, '?': 0 };
+const LBL = { PE: 'Permitido', AC: 'Análise da Comissão', DT: 'Deliberação técnica', PR: 'Proibido', '?': 'Conferir na lei' };
+const pc = (v) => v == null ? 'sigilo' : fmt1(v) + '%';
+const fmt1 = (v) => v == null ? 'sigilo' : v.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const el = (t, a = {}, ...k) => { const e = document.createElement(t); for (const [x, y] of Object.entries(a)) { if (x === 'class') e.className = y; else if (x === 'text') e.textContent = y; else e.setAttribute(x, y); } k.forEach((c) => e.append(c)); return e; };
+const KEY = 'zd-cruzeiro-v1';
+let state = { seg: D.direcao.alav_k, prop: {}, just: {} };
+try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) state = { ...state, ...s }; } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+const cls = (v) => 's-' + (v === '?' ? 'Q' : v);
+const cur = (l, z) => state.prop[l.id + '|' + z] || l.st[z];
+const segLines = (seg) => D.linhas.filter((l) => l.macros.includes(seg));
+
+function renderTabs() {
+  document.querySelectorAll('.tabs button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('.tabs button').forEach((x) => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
+    document.querySelectorAll('.view').forEach((v) => { v.hidden = v.id !== b.dataset.view; });
+  }));
+}
+
+function renderDirecao() {
+  const d = D.direcao;
+  const sel = document.getElementById('div-seg');
+  Object.entries(D.macro_nome).forEach(([k, v]) => sel.append(new Option(v, k)));
+  sel.value = d.alav_k;
+  const draw = () => {
+    const k = sel.value;
+    const rows = D.divisoes.filter((x) => x.macro === k).sort((a, b) => ((b.refs ?? 0) - (b.pct ?? 0)) - ((a.refs ?? 0) - (a.pct ?? 0)));
+    const box = document.getElementById('div-bars'); box.replaceChildren();
+    const all = document.getElementById('div-all');
+    const shown = all.dataset.on === '1' ? rows : rows.slice(0, 10);
+    all.hidden = rows.length <= 10; all.textContent = all.dataset.on === '1' ? 'Mostrar só as 10 maiores diferenças' : `Mostrar todas as ${rows.length} divisões`;
+    const mx = Math.max(1, ...rows.map((r) => Math.max(r.pct ?? 0, r.refs ?? 0)));
+    shown.forEach((r) => {
+      const bb = el('div', { class: 'bb' });
+      bb.append(el('span', { class: 'a', style: `width:${100 * (r.pct ?? 0) / mx * 0.7}%` }), el('span', { class: 'r', style: `width:${100 * (r.refs ?? 0) / mx * 0.7}%` }),
+        el('em', { text: `${pc(r.pct)} · ${pc(r.refs)}` }));
+      box.append(el('div', { class: 'bl', text: `${r.div} ${r.nome}` }), bb);
+    });
+    if (!rows.length) box.append(el('div', { class: 'empty', text: 'Sem divisões neste segmento.' }));
+  };
+  sel.addEventListener('change', () => { document.getElementById('div-all').dataset.on = '0'; draw(); });
+  document.getElementById('div-all').addEventListener('click', (e) => { e.target.dataset.on = e.target.dataset.on === '1' ? '0' : '1'; draw(); });
+  draw();
+}
+
+function renderSeg() {
+  const sel = document.getElementById('seg');
+  Object.entries(D.macro_nome).forEach(([k, v]) => sel.append(new Option(v + (k === D.direcao.alav_k ? ' (alavanca)' : ''), k)));
+  sel.value = state.seg;
+  sel.addEventListener('change', () => { state.seg = sel.value; save(); drawSeg(); });
+  drawSeg();
+}
+
+function drawSeg() {
+  const lines = segLines(state.seg);
+  const strip = document.getElementById('strip'); strip.replaceChildren();
+  const msg = document.getElementById('seg-msg');
+  msg.textContent = lines.length ? '' : 'A lei urbana de Cruzeiro não tem linhas para este segmento no quadro de usos. Agropecuária e extração ficam fora do perímetro urbano; energia, saneamento e construção não aparecem como categoria. Este é, em si, um ponto para a conversa com a prefeitura.';
+  if (lines.length) ZONAS.forEach((z) => {
+    const best = lines.map((l) => cur(l, z)).sort((a, b) => ORD[b] - ORD[a])[0];
+    const n = lines.filter((l) => cur(l, z) === 'PE').length;
+    strip.append(el('div', { class: cls(best), title: NZ[z] }, el('b', { text: z }), document.createTextNode(`${LBL[best]}${best === 'PE' ? ` (${n} de ${lines.length} categorias)` : ''}`)));
+  });
+  drawMatrix(document.getElementById('seg-matrix'), lines);
+}
+
+function drawMatrix(host, lines) {
+  host.replaceChildren();
+  if (!lines.length) return;
+  const t = el('table', { class: 't m' });
+  const hr = el('tr', {}, el('th', { class: 'row', text: 'Categoria de uso na lei' }));
+  ZONAS.forEach((z) => hr.append(el('th', { class: 'z', title: NZ[z], text: z })));
+  t.append(el('thead', {}, hr));
+  const tb = el('tbody');
+  let grp = null;
+  lines.forEach((l) => {
+    if (l.grupo !== grp) { grp = l.grupo; tb.append(el('tr', {}, el('th', { class: 'row', colspan: String(ZONAS.length + 1), style: 'color:var(--gold-soft);font-family:IBM Plex Mono,monospace;font-size:.72rem', text: grp.toUpperCase() }))); }
+    const th = el('th', { class: 'row', text: l.nome });
+    if (l.conferir) th.append(el('span', { class: 'flag', title: 'O OCR desalinhou esta linha; as células cinza precisam ser conferidas no PDF.', text: 'conferir' }));
+    if (l.cnae.length) th.title = 'CNAE: ' + l.cnae.join(', ') + (l.nota ? ' · ' + l.nota : '');
+    const tr = el('tr', {}, th);
+    ZONAS.forEach((z) => {
+      const k = l.id + '|' + z, v = cur(l, z);
+      const b = el('button', { class: cls(v) + (state.prop[k] ? ' prop' : ''), title: `${l.nome} em ${z} (${NZ[z]}): ${LBL[v]}${state.prop[k] ? ` · proposta, na lei: ${LBL[l.st[z]]}` : ''}. Clique para propor outra regra.`, text: v });
+      b.addEventListener('click', () => {
+        const seq = ['PE', 'AC', 'DT', 'PR'];
+        const nx = seq[(seq.indexOf(v) + 1) % seq.length];
+        if (nx === l.st[z]) delete state.prop[k]; else state.prop[k] = nx;
+        save(); drawSeg(); drawProps(); drawFull();
+      });
+      tr.append(el('td', { class: 'c' }, b));
+    });
+    tb.append(tr);
+  });
+  t.append(tb);
+  host.append(el('div', { class: 'tw' }, t));
+}
+
+function drawFull() {
+  const host = document.getElementById('full-matrix');
+  if (host.closest('details').open) drawMatrix(host, D.linhas);
+}
+
+function drawProps() {
+  const host = document.getElementById('props'); host.replaceChildren();
+  const ks = Object.keys(state.prop);
+  document.getElementById('nprops').textContent = ks.length ? `${ks.length} ajuste${ks.length > 1 ? 's' : ''}` : 'nenhum ajuste';
+  if (!ks.length) { host.append(el('p', { class: 'empty', text: 'Nenhum ajuste proposto ainda. Clique numa célula do quadro acima para propor outra regra para aquela categoria naquela zona.' })); return; }
+  const t = el('table', { class: 't' });
+  t.append(el('thead', {}, el('tr', {}, el('th', { text: 'Categoria' }), el('th', { text: 'Zona' }), el('th', { text: 'Na lei' }), el('th', { text: 'Proposta' }), el('th', { text: 'Justificativa' }))));
+  const tb = el('tbody');
+  ks.sort().forEach((k) => {
+    const [id, z] = k.split('|'); const l = D.linhas.find((x) => x.id === id);
+    const ta = el('textarea', { 'aria-label': 'Justificativa' }); ta.value = state.just[k] || '';
+    ta.addEventListener('input', () => { state.just[k] = ta.value; save(); });
+    tb.append(el('tr', {}, el('td', { text: l.nome }), el('td', { text: `${z} · ${NZ[z]}` }), el('td', { text: LBL[l.st[z]] }), el('td', { text: LBL[state.prop[k]] }), el('td', { class: 'prop-list' }, ta)));
+  });
+  t.append(tb);
+  host.append(el('div', { class: 'tw' }, t));
+}
+
+function csvCell(s) { s = String(s ?? ''); return /[",\n;]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function download(name, text, type) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name; document.body.append(a); a.click(); a.remove();
+}
+function exportCSV() {
+  const rows = [['grupo', 'categoria', 'cnae', 'zona', 'nome_zona', 'regra_na_lei', 'regra_proposta', 'conferir_no_pdf', 'justificativa']];
+  D.linhas.forEach((l) => ZONAS.forEach((z) => { const k = l.id + '|' + z; rows.push([l.grupo, l.nome, l.cnae.join(' '), z, NZ[z], l.st[z], state.prop[k] || '', l.st[z] === '?' ? 'sim' : '', state.just[k] || '']); }));
+  download('matriz-zona-cnae-cruzeiro.csv', '﻿' + rows.map((r) => r.map(csvCell).join(',')).join('\n'), 'text/csv;charset=utf-8');
+}
+function renderIO() {
+  document.getElementById('b-csv').addEventListener('click', exportCSV);
+  document.getElementById('b-json').addEventListener('click', () => download('ajustes-zoneamento-cruzeiro.json', JSON.stringify({ municipio: 'Cruzeiro', lei: 'Lei 5.142/2021', ajustes: state.prop, justificativas: state.just }, null, 1), 'application/json'));
+  document.getElementById('f-json').addEventListener('change', async (ev) => {
+    const f = ev.target.files[0]; if (!f) return;
+    try { const j = JSON.parse(await f.text()); state.prop = j.ajustes || {}; state.just = j.justificativas || {}; save(); drawSeg(); drawProps(); drawFull(); } catch (e) { alertBox('Não foi possível ler o arquivo.'); }
+    ev.target.value = '';
+  });
+  document.getElementById('b-clear').addEventListener('click', () => { state.prop = {}; state.just = {}; save(); drawSeg(); drawProps(); drawFull(); });
+  document.getElementById('full').addEventListener('toggle', drawFull);
+}
+function alertBox(t) { const m = document.getElementById('io-msg'); m.textContent = t; }
+
+function renderCnae() {
+  const tb = document.getElementById('cnae-body');
+  const nd = Object.fromEntries(D.divisoes.map((d) => [d.div, d.nome]));
+  D.linhas.filter((l) => l.cnae.length).forEach((l) => {
+    const ind = l.cnae.length > 6 && l.cnae.every((x) => +x >= 10 && +x <= 33);
+    const c = ind ? '10 a 33 (toda a indústria de transformação)' : l.cnae.length > 6 ? 'Divisões ' + l.cnae.join(', ') : l.cnae.map((x) => `${x} ${nd[x] || ''}`).join('; ');
+    tb.append(el('tr', {}, el('td', { text: l.nome }), el('td', { text: c }), el('td', { text: l.nota || '' })));
+  });
+}
+
+renderTabs(); renderDirecao(); renderSeg(); drawProps(); renderIO(); renderCnae();
+})();
+</script>
+</body>
+</html>
